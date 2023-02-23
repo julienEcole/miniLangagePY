@@ -22,9 +22,9 @@ def addNode(graph, t):
 
     graph.node(str(myId), label=str(t[0]))
     for i in range(1, len(t)):
-         graph.edge(str(myId), str(addNode(graph, t[i])), arrowsize='0')
+         graph.edge(str(myId), str(addNode(graph, t[i])), arrowsize='1')
 
 
     return myId
     
- 
+printTreeGraph(('*', ('*', 4, 2), 3))

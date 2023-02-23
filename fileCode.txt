@@ -1,0 +1,16 @@
+nterms = 15;
+n1 = 0;
+n2 = 1;
+
+print(n1);
+print(n2);
+
+for( i = 0 ; i < nterms ;i=i+1){
+    suivant = n1 + n2;
+    print(suivant);
+
+    n1 = n2;
+    n2 = suivant;
+};
+
+printstr(Fin programme);

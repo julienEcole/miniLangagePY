@@ -6,20 +6,21 @@ from genereTreeGraphviz2 import printTreeGraph
 # -----------------------------------------------------------------------------
 reserved = {
     'print' : 'PRINT',
+    'printstr' : 'PRINTSTR',
     'if' : 'IF',
     'else' : 'ELSE',
+    'for' : 'FOR',
     'while' : 'WHILE',
-    'for'   : 'FOR',
-    'function': 'FUNC'
+    'function' : 'FUNC',
+    'return' : 'RETURN'
+   
 }
 
 tokens = [
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN','LACCOLADE', 'RACCOLADE', 'SEMI',
-    'INF', 'SUP', 'AND', 'OR', 'BOOLEQUAL',
-#    'PEQUAL', 'MEQUAL'
-    ] + list(reserved.values())
+    'LPAREN','RPAREN', 'SEMI',
+    'INF', 'SUP', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
 # Tokens
 
 
@@ -30,16 +31,14 @@ t_DIVIDE  = r'/'
 t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_LACCOLADE = r'\{'
-t_RACCOLADE = r'\}'
 t_SEMI    = r';'
 t_INF     = r'<'
-t_SUP     = r'>'
 t_AND     = r'&'
+t_LACCOLADE  = r'{'
+t_RACCOLADE  = r'}'
+t_SUP     = r'>'
 t_OR     = r'\|'
 t_BOOLEQUAL = r'=='
-#t_PEQUAL = r'\+='
-#t_MEQUAL = r'-='
 
 
 def t_NAME(t):
@@ -63,6 +62,19 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
+def file_vide():
+    f = open("printFile.txt", "w")
+    f.close()
+
+def file_write(val):
+    f = open("printFile.txt", "a") 
+    f.write(str(val)+"\n")
+    f.close()
+
+def file_read():
+    f = open("fileCode.txt", "r")
+    return f.read()
+
 # Build the lexer
 import ply.lex as lex
 lex.lex()
@@ -73,57 +85,56 @@ precedence = (
     ('nonassoc', 'INF', 'SUP', 'BOOLEQUAL'),
     ('left','PLUS', 'MINUS'),
     ('left','TIMES','DIVIDE'),
-    #('right','UMINUS')
 )
+ 
 # dictionary of names (for storing variables)
+names = {}
 
 def evalInst(p):
-    print("evaInst de ",p)
-    if p == 'empty' : return
-    if type(p)!=tuple : 
+
+    if p == 'empty' : return 
+
+    if type(p) != tuple : 
         print("inst non tuple")
-        return
-    
-    if p[0]=='bloc':
+        return 
+
+    if p[0] == 'bloc':
         evalInst(p[1])
         evalInst(p[2])
-        return
-        
-    if p[0]=='ASSIGN':
-        names[p[1]]=evalExpr(p[2])
-#    if p[0]=='ASSIGNPLUS':
-#        name[p[1]] = name[p[1]]+evalExpr(p[2])
-#    if p[0]=='ASSIGNLESS':
-#        name[p[1]] = name[p[1]]-evalExpr(p[2])
-    
-    if p[0]=='PRINT':
-        print("CALC> ", evalExpr(p[1]))
-    
-    if(p[0] == 'IF'):
-        if(evalExpr(p[1])):
-            evalInst(p[2])
-        elif(len(p) == 4):
-            evalInst(p[3])
+        return 
 
-    if(p[0] == 'WHILE'):
-        while(evalExpr(p[1])):
+    if p[0] == 'ASSIGN':
+        names[p[1]] = evalExpr(p[2])
+
+    if p[0] == 'PRINT':
+        print("CALC >> ", evalExpr(p[1]))
+        file_write(evalExpr(p[1]))
+    
+    if p[0] == 'PRINTSTR':
+        print("REP >> ", evalString(p[1]))
+        file_write(evalString(p[1]))
+
+    if p[0] == 'IF':
+        if evalExpr(p[1]):
             evalInst(p[2])
 
-    if(p[0] == 'FOR'):
+    if p[0] == 'WHILE':
+        while evalExpr(p[1]):
+            evalInst(p[2])
+
+    if p[0] == 'FOR':
         evalInst(p[1])
-        while(evalExpr[2]):
+        while evalExpr(p[2]):
             evalInst(p[4])
             evalInst(p[3])
-        
+
     return 'UNK'
-    
-names={}
-functions={} #{NOM : (PARAMETRE, CORPS)}
 
 def evalExpr(p):
+    
     if type(p) == int : return p
     if type(p) == str : return names[p]
-    if type(p)==tuple : 
+    if type(p) == tuple:
         if p[0]=='+':return evalExpr(p[1])+evalExpr(p[2])
         if p[0]=='-':return evalExpr(p[1])-evalExpr(p[2])
         if p[0]=='*':return evalExpr(p[1])*evalExpr(p[2])
@@ -131,70 +142,71 @@ def evalExpr(p):
         
         if p[0]=='==':return evalExpr(p[1]) == evalExpr(p[2])
         if p[0]=='&':return evalExpr(p[1]) and evalExpr(p[2])
-        if p[0]=='\|':return evalExpr(p[1]) or evalExpr(p[2])
+        if p[0]=='|':return evalExpr(p[1]) or evalExpr(p[2])
         if p[0]=='<':return evalExpr(p[1]) < evalExpr(p[2])
         if p[0]=='>':return evalExpr(p[1]) > evalExpr(p[2])
+
     return 'UNK'
+    
+def evalString(p):
+    string = ""
+
+    if type(p) is str: string += ' ' + p
+    else:
+        for i in p:
+            if type(i) is str : string += ' ' + i
+            elif type(i) is tuple:
+                string += evalString(i)
+
+    return string
+
 
 def p_start(p):
-    ''' start : bloc '''
-    print(p[1])
-    printTreeGraph(p[1])
+    '''start : bloc '''
+    file_vide()
+    p[0] = ('start',p[1])
+    # print(p[0])
+    printTreeGraph(p[0])
     evalInst(p[1])
-    
-    
+
+
 def p_bloc(p):
     '''bloc : bloc statement SEMI
             | statement SEMI'''
-    if len(p)==3 : p[0]=('bloc', p[1],'empty')
-    else : p[0]=('bloc', p[1],p[2])
+    if len(p)==3 : p[0] = ('bloc', p[1], 'empty')
+    else : p[0] = ('bloc', p[1], p[2])
+    
+  
 
 def p_statement_assign(p):
-    '''statement : NAME EQUALS expression''' #| NAME PEQUAL expression
-                                             #| NAME MEQUAL expression 
-    if(p[3] == '='):
-        p[0]=('ASSIGN', p[1],p[3])
-#    if(p[3] == '+='):
-#        p[0]=('ASSIGNPLUS',p[1],p[3])
-#    if(p[3] == '-='):
-#        p[0]=('ASSIGNLESS',p[1],p[3])
-    
+    'statement : NAME EQUALS expression'
+    p[0] = ('ASSIGN', p[1], p[3])
 
 def p_statement_expr(p):
-    '''statement : PRINT LPAREN expression RPAREN
-                 | IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE ELSE LACCOLADE bloc RACCOLADE
-                 | IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-                 | WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-                 | FOR LPAREN NAME EQUALS expression SEMI expression SEMI bloc RPAREN LACCOLADE bloc RACCOLADE'''
-    #print("entrée dans expr\n") #debug
-    if(p[1] == 'if'):
-        #print("detection if\n") #debug
-        if(len(p) >= 8 and p[8] == 'else'):
-            #print("ecriture du if else") #debug
-            p[0] = ('IF',p[3], p[6],p[10])#(IF, CONDITION, DO, ELSE)
-        else:
-            #print("ecriture du if sans else")#debug
-            p[0] = ('IF',p[3], p[6]) 
-    if(p[1] == 'print'):
-        p[0] = ('PRINT', p[3])
-    if(p[1] == 'while'):
-        p[0] = ('WHILE', p[3],p[6]) #(WHILE, CONDITION, DO)
-    if(p[1] == 'for'):
-        p[0] = (p[1],('ASSIGN', p[3],p[5]),p[7],p[9],p[12])#(FOR,ASSIGNATION,CONDITION,RETOURLIGNE,DO)
+    'statement : PRINT LPAREN expression RPAREN'
+    p[0] = ('PRINT', p[3])
+
+def p_statement_print_str(p):
+    'statement : PRINTSTR LPAREN strings RPAREN'
+    p[0] = ('PRINTSTR', p[3])
 
 
-#def p_statement_while(p):
-#    'statement : WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE'
-#    p[0] = ('WHILE', p[3],p[6]) #(WHILE, CONDITION, DO)
+def p_statement_if(p):
+    'statement : IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE'
+    p[0] = ('IF', p[3], p[6])
 
-#def p_statement_for(p):
-#    'statement : FOR LPAREN statement SEMI expression SEMI expression RPAREN LACCOLADE bloc RACCOLADE'
-#    p[0] = ('FOR',p[3],p[5],p[7],p[10])
+def p_statement_while(p):
+    'statement : WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE'
+    p[0] = ('WHILE', p[3], p[6])
 
-#def p_statement_for(p):
-#    'statement : FOR LPAREN NAME EQUALS expression SEMI expression SEMI expression RPAREN LACCOLADE bloc RACCOLADE'
-#    p[0] = (p[1],('ASSIGN', p[3],p[5]),p[7],p[9],p[12])
-    
+def p_statement_for(p):
+    'statement : FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE'
+    p[0] = ('FOR', ('ASSIGN', p[3],p[5]), p[7], ('ASSIGN', p[9],p[11]), p[14])
+
+def p_statement_funct(p):
+    'statement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE'
+    p[0] = ('function',p[2], p[6])
+
 
 def p_expression_binop(p):
     '''expression : expression PLUS expression
@@ -206,16 +218,15 @@ def p_expression_binop(p):
                   | expression AND expression 
                   | expression OR expression
                   | expression BOOLEQUAL expression '''
-    p[0] = (p[2],p[1] , p[3])
+    p[0] = (p[2], p[1] , p[3])
 
 
 def p_expression_uminus(p):
-    'expression : MINUS expression '
+    'expression : MINUS expression'
     p[0] = -p[2]
 
 def p_expression_group(p):
-    '''expression : LPAREN expression RPAREN
-                  | LACCOLADE expression RACCOLADE'''
+    'expression : LPAREN expression RPAREN'
     p[0] = p[2]
 
 def p_expression_number(p):
@@ -226,14 +237,24 @@ def p_expression_name(p):
     'expression : NAME'
     p[0] = p[1]
 
+def p_print_name(p):
+    '''strings : NAME strings
+               | NAME'''
+    if len(p)==3 : p[0] = (p[1], p[2])
+    else : p[0] = (p[1])
+
 def p_error(p):
     print("Syntax error at '%s'" % p.value)
 
 import ply.yacc as yacc
 yacc.yacc()
 
-s='for(x=0;x<2;x=x+1;){print(x);};'
-#s='print(1<2 & 2<1);x=17;print(x+4);'
-#s='print(1+2);x=4;x=x+1;'
-#s='x=4;x=x+1;print(x+1);'
+
+# s = input('INPUT >>> ')
+s='print(1+2);x=4;x=x+1;'
+s='x=4;x=x+1;if(x<10){print(1+2);};'
+
+s=file_read()
+
+
 yacc.parse(s)

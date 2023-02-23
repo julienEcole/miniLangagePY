@@ -89,6 +89,7 @@ precedence = (
  
 # dictionary of names (for storing variables)
 names = {}
+functions={} #{NOM : (PARAMETRE, CORPS)}
 
 def evalInst(p):
 
@@ -111,7 +112,7 @@ def evalInst(p):
         file_write(evalExpr(p[1]))
     
     if p[0] == 'PRINTSTR':
-        print("REP >> ", evalString(p[1]))
+        print("STR >> ", evalString(p[1]))
         file_write(evalString(p[1]))
 
     if p[0] == 'IF':
@@ -127,6 +128,15 @@ def evalInst(p):
         while evalExpr(p[2]):
             evalInst(p[4])
             evalInst(p[3])
+
+    if p[0] == "FUNC":
+        functions[p[1][0]] = (p[1][1] ,p[1][2])
+
+    if p[0] == "CALL":
+        if p[1] in functions:
+            evalInst(functions[p[1]][1])
+        else:
+            print(f"Erreur: La fonction ->{p[1]}() n'existe pas")
 
     return 'UNK'
 
@@ -205,8 +215,12 @@ def p_statement_for(p):
 
 def p_statement_funct(p):
     'statement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE'
-    p[0] = ('function',p[2], p[6])
+    p[0] = ('FUNC',(p[2], 'param', p[6]))
 
+def p_statement_call_function(p):
+    'statement : NAME LPAREN RPAREN'
+    p[0] = ('CALL', p[1])
+    
 
 def p_expression_binop(p):
     '''expression : expression PLUS expression
@@ -255,6 +269,7 @@ s='print(1+2);x=4;x=x+1;'
 s='x=4;x=x+1;if(x<10){print(1+2);};'
 
 s=file_read()
+
 
 
 yacc.parse(s)

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftORleftANDnonassocINFSUPBOOLEQUALleftPLUSMINUSleftTIMESDIVIDEAND BOOLEQUAL DIVIDE ELSE EQUALS FOR FUNC IF INF LACCOLADE LPAREN MINUS NAME NUMBER OR PLUS PRINT PRINTSTR RACCOLADE RETURN RPAREN SEMI SUP TIMES WHILEstart : bloc bloc : bloc statement SEMI\n            | statement SEMIstatement : NAME EQUALS expressionstatement : PRINT LPAREN expression RPARENstatement : PRINTSTR LPAREN strings RPARENstatement : IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADEstatement : WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADEstatement : FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADEstatement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADEexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression INF expression \n                  | expression SUP expression \n                  | expression AND expression \n                  | expression OR expression\n                  | expression BOOLEQUAL expression expression : MINUS expressionexpression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEstrings : NAME strings\n               | NAME'
+_lr_signature = 'leftORleftANDnonassocINFSUPBOOLEQUALleftPLUSMINUSleftTIMESDIVIDEAND BOOLEQUAL DIVIDE ELSE EQUALS FOR FUNC IF INF LACCOLADE LPAREN MINUS NAME NUMBER OR PLUS PRINT PRINTSTR RACCOLADE RETURN RPAREN SEMI SUP TIMES WHILEstart : bloc bloc : bloc statement SEMI\n            | statement SEMIstatement : NAME EQUALS expressionstatement : PRINT LPAREN expression RPARENstatement : PRINTSTR LPAREN strings RPARENstatement : IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADEstatement : WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADEstatement : FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADEstatement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADEstatement : NAME LPAREN RPARENexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression INF expression \n                  | expression SUP expression \n                  | expression AND expression \n                  | expression OR expression\n                  | expression BOOLEQUAL expression expression : MINUS expressionexpression : LPAREN expression RPARENexpression : NUMBERexpression : NAMEstrings : NAME strings\n               | NAME'
     
-_lr_action_items = {'NAME':([0,2,10,12,13,14,15,16,17,18,20,23,24,28,33,34,35,36,37,38,39,40,41,49,61,62,64,65,66,67,68,73,75,78,79,],[4,4,19,-3,21,21,28,21,21,31,-2,21,21,28,21,21,21,21,21,21,21,21,21,21,4,4,4,4,4,21,4,74,21,4,4,]),'PRINT':([0,2,12,20,61,62,64,65,66,68,78,79,],[5,5,-3,-2,5,5,5,5,5,5,5,5,]),'PRINTSTR':([0,2,12,20,61,62,64,65,66,68,78,79,],[6,6,-3,-2,6,6,6,6,6,6,6,6,]),'IF':([0,2,12,20,61,62,64,65,66,68,78,79,],[7,7,-3,-2,7,7,7,7,7,7,7,7,]),'WHILE':([0,2,12,20,61,62,64,65,66,68,78,79,],[8,8,-3,-2,8,8,8,8,8,8,8,8,]),'FOR':([0,2,12,20,61,62,64,65,66,68,78,79,],[9,9,-3,-2,9,9,9,9,9,9,9,9,]),'FUNC':([0,2,12,20,61,62,64,65,66,68,78,79,],[10,10,-3,-2,10,10,10,10,10,10,10,10,]),'$end':([1,2,12,20,],[0,-1,-3,-2,]),'SEMI':([3,11,21,22,25,42,44,45,51,52,53,54,55,56,57,58,59,60,63,69,70,71,72,80,],[12,20,-23,-4,-22,-20,-5,-6,-11,-12,-13,-14,-15,-16,-17,-18,-19,-21,67,-7,-8,73,-10,-9,]),'EQUALS':([4,31,74,],[13,49,75,]),'LPAREN':([5,6,7,8,9,13,14,16,17,19,23,24,33,34,35,36,37,38,39,40,41,49,67,75,],[14,15,16,17,18,24,24,24,24,32,24,24,24,24,24,24,24,24,24,24,24,24,24,24,]),'RACCOLADE':([12,20,65,66,68,79,],[-3,-2,69,70,72,80,]),'MINUS':([13,14,16,17,21,22,23,24,25,26,29,30,33,34,35,36,37,38,39,40,41,42,43,49,51,52,53,54,55,56,57,58,59,60,63,67,71,75,76,],[23,23,23,23,-23,34,23,23,-22,34,34,34,23,23,23,23,23,23,23,23,23,-20,34,23,-11,-12,-13,-14,34,34,34,34,34,-21,34,23,34,23,34,]),'NUMBER':([13,14,16,17,23,24,33,34,35,36,37,38,39,40,41,49,67,75,],[25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,]),'PLUS':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,33,-22,33,33,33,-20,33,-11,-12,-13,-14,33,33,33,33,33,-21,33,33,33,]),'TIMES':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,35,-22,35,35,35,35,35,35,35,-13,-14,35,35,35,35,35,-21,35,35,35,]),'DIVIDE':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,36,-22,36,36,36,36,36,36,36,-13,-14,36,36,36,36,36,-21,36,36,36,]),'INF':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,37,-22,37,37,37,-20,37,-11,-12,-13,-14,None,None,37,37,None,-21,37,37,37,]),'SUP':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,38,-22,38,38,38,-20,38,-11,-12,-13,-14,None,None,38,38,None,-21,38,38,38,]),'AND':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,39,-22,39,39,39,-20,39,-11,-12,-13,-14,-15,-16,-17,39,-19,-21,39,39,39,]),'OR':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,40,-22,40,40,40,-20,40,-11,-12,-13,-14,-15,-16,-17,-18,-19,-21,40,40,40,]),'BOOLEQUAL':([21,22,25,26,29,30,42,43,51,52,53,54,55,56,57,58,59,60,63,71,76,],[-23,41,-22,41,41,41,-20,41,-11,-12,-13,-14,None,None,41,41,None,-21,41,41,41,]),'RPAREN':([21,25,26,27,28,29,30,32,42,43,46,51,52,53,54,55,56,57,58,59,60,76,],[-23,-22,44,45,-25,47,48,50,-20,60,-24,-11,-12,-13,-14,-15,-16,-17,-18,-19,-21,77,]),'LACCOLADE':([47,48,50,77,],[61,62,64,78,]),}
+_lr_action_items = {'NAME':([0,2,10,12,13,15,16,17,18,19,21,24,25,30,35,36,37,38,39,40,41,42,43,51,63,64,66,67,68,69,70,75,77,80,81,],[4,4,20,-3,22,22,30,22,22,33,-2,22,22,30,22,22,22,22,22,22,22,22,22,22,4,4,4,4,4,22,4,76,22,4,4,]),'PRINT':([0,2,12,21,63,64,66,67,68,70,80,81,],[5,5,-3,-2,5,5,5,5,5,5,5,5,]),'PRINTSTR':([0,2,12,21,63,64,66,67,68,70,80,81,],[6,6,-3,-2,6,6,6,6,6,6,6,6,]),'IF':([0,2,12,21,63,64,66,67,68,70,80,81,],[7,7,-3,-2,7,7,7,7,7,7,7,7,]),'WHILE':([0,2,12,21,63,64,66,67,68,70,80,81,],[8,8,-3,-2,8,8,8,8,8,8,8,8,]),'FOR':([0,2,12,21,63,64,66,67,68,70,80,81,],[9,9,-3,-2,9,9,9,9,9,9,9,9,]),'FUNC':([0,2,12,21,63,64,66,67,68,70,80,81,],[10,10,-3,-2,10,10,10,10,10,10,10,10,]),'$end':([1,2,12,21,],[0,-1,-3,-2,]),'SEMI':([3,11,22,23,26,27,44,46,47,53,54,55,56,57,58,59,60,61,62,65,71,72,73,74,82,],[12,21,-24,-4,-23,-11,-21,-5,-6,-12,-13,-14,-15,-16,-17,-18,-19,-20,-22,69,-7,-8,75,-10,-9,]),'EQUALS':([4,33,76,],[13,51,77,]),'LPAREN':([4,5,6,7,8,9,13,15,17,18,20,24,25,35,36,37,38,39,40,41,42,43,51,69,77,],[14,15,16,17,18,19,25,25,25,25,34,25,25,25,25,25,25,25,25,25,25,25,25,25,25,]),'RACCOLADE':([12,21,67,68,70,81,],[-3,-2,71,72,74,82,]),'MINUS':([13,15,17,18,22,23,24,25,26,28,31,32,35,36,37,38,39,40,41,42,43,44,45,51,53,54,55,56,57,58,59,60,61,62,65,69,73,77,78,],[24,24,24,24,-24,36,24,24,-23,36,36,36,24,24,24,24,24,24,24,24,24,-21,36,24,-12,-13,-14,-15,36,36,36,36,36,-22,36,24,36,24,36,]),'NUMBER':([13,15,17,18,24,25,35,36,37,38,39,40,41,42,43,51,69,77,],[26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,]),'RPAREN':([14,22,26,28,29,30,31,32,34,44,45,48,53,54,55,56,57,58,59,60,61,62,78,],[27,-24,-23,46,47,-26,49,50,52,-21,62,-25,-12,-13,-14,-15,-16,-17,-18,-19,-20,-22,79,]),'PLUS':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,35,-23,35,35,35,-21,35,-12,-13,-14,-15,35,35,35,35,35,-22,35,35,35,]),'TIMES':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,37,-23,37,37,37,37,37,37,37,-14,-15,37,37,37,37,37,-22,37,37,37,]),'DIVIDE':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,38,-23,38,38,38,38,38,38,38,-14,-15,38,38,38,38,38,-22,38,38,38,]),'INF':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,39,-23,39,39,39,-21,39,-12,-13,-14,-15,None,None,39,39,None,-22,39,39,39,]),'SUP':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,40,-23,40,40,40,-21,40,-12,-13,-14,-15,None,None,40,40,None,-22,40,40,40,]),'AND':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,41,-23,41,41,41,-21,41,-12,-13,-14,-15,-16,-17,-18,41,-20,-22,41,41,41,]),'OR':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,42,-23,42,42,42,-21,42,-12,-13,-14,-15,-16,-17,-18,-19,-20,-22,42,42,42,]),'BOOLEQUAL':([22,23,26,28,31,32,44,45,53,54,55,56,57,58,59,60,61,62,65,73,78,],[-24,43,-23,43,43,43,-21,43,-12,-13,-14,-15,None,None,43,43,None,-22,43,43,43,]),'LACCOLADE':([49,50,52,79,],[63,64,66,80,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[1,]),'bloc':([0,61,62,64,78,],[2,65,66,68,79,]),'statement':([0,2,61,62,64,65,66,68,78,79,],[3,11,3,3,3,11,11,11,3,11,]),'expression':([13,14,16,17,23,24,33,34,35,36,37,38,39,40,41,49,67,75,],[22,26,29,30,42,43,51,52,53,54,55,56,57,58,59,63,71,76,]),'strings':([15,28,],[27,46,]),}
+_lr_goto_items = {'start':([0,],[1,]),'bloc':([0,63,64,66,80,],[2,67,68,70,81,]),'statement':([0,2,63,64,66,67,68,70,80,81,],[3,11,3,3,3,11,11,11,3,11,]),'expression':([13,15,17,18,24,25,35,36,37,38,39,40,41,42,43,51,69,77,],[23,28,31,32,44,45,53,54,55,56,57,58,59,60,61,65,73,78,]),'strings':([16,30,],[29,48,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,29 +27,30 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> bloc','start',1,'p_start','tmp.py',165),
-  ('bloc -> bloc statement SEMI','bloc',3,'p_bloc','tmp.py',174),
-  ('bloc -> statement SEMI','bloc',2,'p_bloc','tmp.py',175),
-  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','tmp.py',182),
-  ('statement -> PRINT LPAREN expression RPAREN','statement',4,'p_statement_expr','tmp.py',186),
-  ('statement -> PRINTSTR LPAREN strings RPAREN','statement',4,'p_statement_print_str','tmp.py',190),
-  ('statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_if','tmp.py',195),
-  ('statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_while','tmp.py',199),
-  ('statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE','statement',15,'p_statement_for','tmp.py',203),
-  ('statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_funct','tmp.py',207),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','tmp.py',212),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','tmp.py',213),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','tmp.py',214),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','tmp.py',215),
-  ('expression -> expression INF expression','expression',3,'p_expression_binop','tmp.py',216),
-  ('expression -> expression SUP expression','expression',3,'p_expression_binop','tmp.py',217),
-  ('expression -> expression AND expression','expression',3,'p_expression_binop','tmp.py',218),
-  ('expression -> expression OR expression','expression',3,'p_expression_binop','tmp.py',219),
-  ('expression -> expression BOOLEQUAL expression','expression',3,'p_expression_binop','tmp.py',220),
-  ('expression -> MINUS expression','expression',2,'p_expression_uminus','tmp.py',225),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','tmp.py',229),
-  ('expression -> NUMBER','expression',1,'p_expression_number','tmp.py',233),
-  ('expression -> NAME','expression',1,'p_expression_name','tmp.py',237),
-  ('strings -> NAME strings','strings',2,'p_print_name','tmp.py',241),
-  ('strings -> NAME','strings',1,'p_print_name','tmp.py',242),
+  ('start -> bloc','start',1,'p_start','TP1_sans_precedence.py',169),
+  ('bloc -> bloc statement SEMI','bloc',3,'p_bloc','TP1_sans_precedence.py',178),
+  ('bloc -> statement SEMI','bloc',2,'p_bloc','TP1_sans_precedence.py',179),
+  ('statement -> NAME EQUALS expression','statement',3,'p_statement_assign','TP1_sans_precedence.py',186),
+  ('statement -> PRINT LPAREN expression RPAREN','statement',4,'p_statement_expr','TP1_sans_precedence.py',190),
+  ('statement -> PRINTSTR LPAREN strings RPAREN','statement',4,'p_statement_print_str','TP1_sans_precedence.py',194),
+  ('statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_if','TP1_sans_precedence.py',199),
+  ('statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_while','TP1_sans_precedence.py',203),
+  ('statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE','statement',15,'p_statement_for','TP1_sans_precedence.py',207),
+  ('statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE','statement',7,'p_statement_funct','TP1_sans_precedence.py',211),
+  ('statement -> NAME LPAREN RPAREN','statement',3,'p_statement_call_function','TP1_sans_precedence.py',216),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',220),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',221),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',222),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',223),
+  ('expression -> expression INF expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',224),
+  ('expression -> expression SUP expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',225),
+  ('expression -> expression AND expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',226),
+  ('expression -> expression OR expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',227),
+  ('expression -> expression BOOLEQUAL expression','expression',3,'p_expression_binop','TP1_sans_precedence.py',228),
+  ('expression -> MINUS expression','expression',2,'p_expression_uminus','TP1_sans_precedence.py',233),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','TP1_sans_precedence.py',237),
+  ('expression -> NUMBER','expression',1,'p_expression_number','TP1_sans_precedence.py',241),
+  ('expression -> NAME','expression',1,'p_expression_name','TP1_sans_precedence.py',245),
+  ('strings -> NAME strings','strings',2,'p_print_name','TP1_sans_precedence.py',249),
+  ('strings -> NAME','strings',1,'p_print_name','TP1_sans_precedence.py',250),
 ]

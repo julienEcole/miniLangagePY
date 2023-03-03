@@ -1,4 +1,5 @@
 from genereTreeGraphviz2 import printTreeGraph
+from pprint import pprint
 # -----------------------------------------------------------------------------
 # calc.py
 #
@@ -19,8 +20,8 @@ reserved = {
 tokens = [
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'SEMI',
-    'INF', 'SUP', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
+    'LPAREN','RPAREN', 'SEMI', 'COMA', 
+    'INF','INFEQUAL', 'SUP', 'SUPEQUAL', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
 # Tokens
 
 
@@ -33,12 +34,15 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_SEMI    = r';'
 t_INF     = r'<'
+t_INFEQUAL= r'<='
+t_SUP     = r'>'
+t_SUPEQUAL= r'>='
 t_AND     = r'&'
 t_LACCOLADE  = r'{'
 t_RACCOLADE  = r'}'
-t_SUP     = r'>'
 t_OR     = r'\|'
 t_BOOLEQUAL = r'=='
+t_COMA = r'\,'
 
 
 def t_NAME(t):
@@ -82,7 +86,7 @@ lex.lex()
 precedence = (
     ('left', 'OR'),
     ('left', 'AND'),
-    ('nonassoc', 'INF', 'SUP', 'BOOLEQUAL'),
+    ('nonassoc', 'INF', 'SUP', 'BOOLEQUAL', 'INFEQUAL', 'SUPEQUAL'),
     ('left','PLUS', 'MINUS'),
     ('left','TIMES','DIVIDE'),
 )
@@ -90,6 +94,7 @@ precedence = (
 # dictionary of names (for storing variables)
 names = {}
 functions={} #{NOM : (PARAMETRE, CORPS)}
+isInFunction = False
 
 def evalInst(p):
 
@@ -130,20 +135,45 @@ def evalInst(p):
             evalInst(p[3])
 
     if p[0] == "FUNC":
-        functions[p[1][0]] = (p[1][1] ,p[1][2])
+        if p[1][1] != 'empty':
+            functions[p[1][0]] = (assignParam(p[1][0],p[1][1], []) ,p[1][2])
+        else:
+            functions[p[1][0]] = (p[1][1] ,p[1][2])
 
     if p[0] == "CALL":
         if p[1] in functions:
             evalInst(functions[p[1]][1])
         else:
+            # TODO: Si la fonction n'existe pas, throw une exeption
             print(f"Erreur: La fonction ->{p[1]}() n'existe pas")
+            return
+    
+    if p[0] == 'CALL_PARAM':
+        global isInFunction
+        isInFunction = p[1]
+        assignValueParam(p[1],p[2])
+        evalInst(functions[p[1]][1])
+        isInFunction = False
 
     return 'UNK'
 
 def evalExpr(p):
     
     if type(p) == int : return p
-    if type(p) == str : return names[p]
+    if type(p) == str : 
+        #--------------------------------
+        # Check if it has to serch into local variable or into global
+        if isInFunction : #si on est dans une fonction et que la var locale du meme nom existe
+            for x in functions[isInFunction][0]:
+                if x[0] == p:
+                    return x[1]
+        #--------------------------------
+        # PARTIE VAR GLOBALE
+        # TODO: Si la varible n'existe pas throw une exeption
+        if not(names[p]) : return 'UNK' # In this case we call an unknow variable
+        return names[p]
+        #-------------------------
+        #fin var
     if type(p) == tuple:
         if p[0]=='+':return evalExpr(p[1])+evalExpr(p[2])
         if p[0]=='-':return evalExpr(p[1])-evalExpr(p[2])
@@ -155,6 +185,8 @@ def evalExpr(p):
         if p[0]=='|':return evalExpr(p[1]) or evalExpr(p[2])
         if p[0]=='<':return evalExpr(p[1]) < evalExpr(p[2])
         if p[0]=='>':return evalExpr(p[1]) > evalExpr(p[2])
+        if p[0]=='<=':return evalExpr(p[1]) <= evalExpr(p[2])
+        if p[0]=='>=':return evalExpr(p[1]) >= evalExpr(p[2])
 
     return 'UNK'
     
@@ -170,12 +202,35 @@ def evalString(p):
 
     return string
 
+def assignParam(name, val, rep=[]):
+    for param in val:
+        if type(param) is tuple:
+            assignParam(name, param, rep)
+        elif type(param) is str and param is not 'PARAM':
+            rep.append([param, 'undefined'])
+    return rep
+
+def getValueParam(name, val, rep=[]):
+    if type(val) is not tuple:
+        val = [val]
+
+    for param in val:
+        if type(param) is tuple:
+            getValueParam(name, param, rep)
+        else :
+            rep.append(evalExpr(param))
+    return rep
+
+def assignValueParam(name, val):
+    listVal = getValueParam(name,val, [])
+    for i in range(len(functions[name][0])):
+        functions[name][0][i][1] =  listVal[i]
+
 
 def p_start(p):
     '''start : bloc '''
     file_vide()
     p[0] = ('start',p[1])
-    # print(p[0])
     printTreeGraph(p[0])
     evalInst(p[1])
 
@@ -214,12 +269,17 @@ def p_statement_for(p):
     p[0] = ('FOR', ('ASSIGN', p[3],p[5]), p[7], ('ASSIGN', p[9],p[11]), p[14])
 
 def p_statement_funct(p):
-    'statement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE'
-    p[0] = ('FUNC',(p[2], 'param', p[6]))
+    '''statement : FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
+                 | FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE'''
+    if len(p)==8 : p[0] = ('FUNC',(p[2], 'empty', p[6]))
+    elif len(p)>8 : p[0] = ('FUNC',(p[2], p[4], p[7]))
+
 
 def p_statement_call_function(p):
-    'statement : NAME LPAREN RPAREN'
-    p[0] = ('CALL', p[1])
+    '''statement : NAME LPAREN RPAREN
+                 | NAME LPAREN expression RPAREN'''
+    if len(p)==4 : p[0] = ('CALL', p[1])
+    else : p[0] = ('CALL_PARAM', p[1], p[3])
     
 
 def p_expression_binop(p):
@@ -228,7 +288,9 @@ def p_expression_binop(p):
                   | expression TIMES expression
                   | expression DIVIDE expression
                   | expression INF expression 
-                  | expression SUP expression 
+                  | expression SUP expression
+                  | expression INFEQUAL expression 
+                  | expression SUPEQUAL expression 
                   | expression AND expression 
                   | expression OR expression
                   | expression BOOLEQUAL expression '''
@@ -238,6 +300,10 @@ def p_expression_binop(p):
 def p_expression_uminus(p):
     'expression : MINUS expression'
     p[0] = -p[2]
+
+def p_expression_suite(p):
+    '''expression : expression COMA expression'''
+    p[0] = (p[1], p[3])
 
 def p_expression_group(p):
     'expression : LPAREN expression RPAREN'
@@ -250,6 +316,12 @@ def p_expression_number(p):
 def p_expression_name(p):
     'expression : NAME'
     p[0] = p[1]
+
+def p_param_funct(p):
+    '''param : NAME COMA param
+             | NAME'''
+    if len(p)==4 : p[0] = ("PARAM", p[1], p[3]) 
+    elif len(p)==2 : p[0] = ("PARAM", p[1])
 
 def p_print_name(p):
     '''strings : NAME strings
@@ -273,3 +345,6 @@ s=file_read()
 
 
 yacc.parse(s)
+
+
+pprint(functions)

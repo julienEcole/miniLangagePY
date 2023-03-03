@@ -2,7 +2,11 @@ function test(){
     printstr(cest du text depuis une fonctions);
 };
 
-function suiteFibonacci(){
+function secondTest(param1){
+    print(param13);
+};
+
+function suiteFibonacci(param1,param2,param3,param4){
     nterms = 15;
     n1 = 0;
     n2 = 1;
@@ -22,7 +26,8 @@ function suiteFibonacci(){
 
 printstr(test);
 test();
-printstr(suiteFibonacci);
-suiteFibonaczci();
+secondTest(999999999);
+suiteFibonacci(1,2,3,4);
+printstr(fin exemple);
 
 printstr(Fin programme);

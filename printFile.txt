@@ -1,4 +1,3 @@
  test
  cest du text depuis une fonctions
- suiteFibonacci
  Fin programme

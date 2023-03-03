@@ -170,7 +170,7 @@ def evalExpr(p):
         #--------------------------------
         # PARTIE VAR GLOBALE
         # TODO: Si la varible n'existe pas throw une exeption
-        if not(names[p]) : return 'UNK' # In this case we call an unknow variable
+        elif not(names[p]) : return 'UNK' # In this case we call an unknow variable
         return names[p]
         #-------------------------
         #fin var

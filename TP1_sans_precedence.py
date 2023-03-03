@@ -21,7 +21,7 @@ tokens = [
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN', 'SEMI', 'COMA', 
-    'INF', 'SUP', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
+    'INF','INFEQUAL', 'SUP', 'SUPEQUAL', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
 # Tokens
 
 
@@ -34,10 +34,12 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_SEMI    = r';'
 t_INF     = r'<'
+t_INFEQUAL= r'<='
+t_SUP     = r'>'
+t_SUPEQUAL= r'>='
 t_AND     = r'&'
 t_LACCOLADE  = r'{'
 t_RACCOLADE  = r'}'
-t_SUP     = r'>'
 t_OR     = r'\|'
 t_BOOLEQUAL = r'=='
 t_COMA = r'\,'
@@ -84,7 +86,7 @@ lex.lex()
 precedence = (
     ('left', 'OR'),
     ('left', 'AND'),
-    ('nonassoc', 'INF', 'SUP', 'BOOLEQUAL'),
+    ('nonassoc', 'INF', 'SUP', 'BOOLEQUAL', 'INFEQUAL', 'SUPEQUAL'),
     ('left','PLUS', 'MINUS'),
     ('left','TIMES','DIVIDE'),
 )
@@ -92,6 +94,7 @@ precedence = (
 # dictionary of names (for storing variables)
 names = {}
 functions={} #{NOM : (PARAMETRE, CORPS)}
+isInFunction = False
 
 def evalInst(p):
 
@@ -141,17 +144,36 @@ def evalInst(p):
         if p[1] in functions:
             evalInst(functions[p[1]][1])
         else:
+            # TODO: Si la fonction n'existe pas, throw une exeption
             print(f"Erreur: La fonction ->{p[1]}() n'existe pas")
+            return
     
     if p[0] == 'CALL_PARAM':
+        global isInFunction
+        isInFunction = p[1]
         assignValueParam(p[1],p[2])
+        evalInst(functions[p[1]][1])
+        isInFunction = False
 
     return 'UNK'
 
 def evalExpr(p):
     
     if type(p) == int : return p
-    if type(p) == str : return names[p]
+    if type(p) == str : 
+        #--------------------------------
+        # Check if it has to serch into local variable or into global
+        if isInFunction : #si on est dans une fonction et que la var locale du meme nom existe
+            for x in functions[isInFunction][0]:
+                if x[0] == p:
+                    return x[1]
+        #--------------------------------
+        # PARTIE VAR GLOBALE
+        # TODO: Si la varible n'existe pas throw une exeption
+        if not(names[p]) : return 'UNK' # In this case we call an unknow variable
+        return names[p]
+        #-------------------------
+        #fin var
     if type(p) == tuple:
         if p[0]=='+':return evalExpr(p[1])+evalExpr(p[2])
         if p[0]=='-':return evalExpr(p[1])-evalExpr(p[2])
@@ -163,6 +185,8 @@ def evalExpr(p):
         if p[0]=='|':return evalExpr(p[1]) or evalExpr(p[2])
         if p[0]=='<':return evalExpr(p[1]) < evalExpr(p[2])
         if p[0]=='>':return evalExpr(p[1]) > evalExpr(p[2])
+        if p[0]=='<=':return evalExpr(p[1]) <= evalExpr(p[2])
+        if p[0]=='>=':return evalExpr(p[1]) >= evalExpr(p[2])
 
     return 'UNK'
     
@@ -264,7 +288,9 @@ def p_expression_binop(p):
                   | expression TIMES expression
                   | expression DIVIDE expression
                   | expression INF expression 
-                  | expression SUP expression 
+                  | expression SUP expression
+                  | expression INFEQUAL expression 
+                  | expression SUPEQUAL expression 
                   | expression AND expression 
                   | expression OR expression
                   | expression BOOLEQUAL expression '''

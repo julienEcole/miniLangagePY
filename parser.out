@@ -27,24 +27,26 @@ Rule 16    expression -> expression TIMES expression
 Rule 17    expression -> expression DIVIDE expression
 Rule 18    expression -> expression INF expression
 Rule 19    expression -> expression SUP expression
-Rule 20    expression -> expression AND expression
-Rule 21    expression -> expression OR expression
-Rule 22    expression -> expression BOOLEQUAL expression
-Rule 23    expression -> MINUS expression
-Rule 24    expression -> expression COMA expression
-Rule 25    expression -> LPAREN expression RPAREN
-Rule 26    expression -> NUMBER
-Rule 27    expression -> NAME
-Rule 28    param -> NAME COMA param
-Rule 29    param -> NAME
-Rule 30    strings -> NAME strings
-Rule 31    strings -> NAME
+Rule 20    expression -> expression INFEQUAL expression
+Rule 21    expression -> expression SUPEQUAL expression
+Rule 22    expression -> expression AND expression
+Rule 23    expression -> expression OR expression
+Rule 24    expression -> expression BOOLEQUAL expression
+Rule 25    expression -> MINUS expression
+Rule 26    expression -> expression COMA expression
+Rule 27    expression -> LPAREN expression RPAREN
+Rule 28    expression -> NUMBER
+Rule 29    expression -> NAME
+Rule 30    param -> NAME COMA param
+Rule 31    param -> NAME
+Rule 32    strings -> NAME strings
+Rule 33    strings -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 20
-BOOLEQUAL            : 22
-COMA                 : 24 28
+AND                  : 22
+BOOLEQUAL            : 24
+COMA                 : 26 30
 DIVIDE               : 17
 ELSE                 : 
 EQUALS               : 4 9 9
@@ -52,20 +54,22 @@ FOR                  : 9
 FUNC                 : 10 11
 IF                   : 7
 INF                  : 18
+INFEQUAL             : 20
 LACCOLADE            : 7 8 9 10 11
-LPAREN               : 5 6 7 8 9 10 11 12 13 25
-MINUS                : 15 23
-NAME                 : 4 9 9 10 11 12 13 27 28 29 30 31
-NUMBER               : 26
-OR                   : 21
+LPAREN               : 5 6 7 8 9 10 11 12 13 27
+MINUS                : 15 25
+NAME                 : 4 9 9 10 11 12 13 29 30 31 32 33
+NUMBER               : 28
+OR                   : 23
 PLUS                 : 14
 PRINT                : 5
 PRINTSTR             : 6
 RACCOLADE            : 7 8 9 10 11
 RETURN               : 
-RPAREN               : 5 6 7 8 9 10 11 12 13 25
+RPAREN               : 5 6 7 8 9 10 11 12 13 27
 SEMI                 : 2 3 9 9
 SUP                  : 19
+SUPEQUAL             : 21
 TIMES                : 16
 WHILE                : 8
 error                : 
@@ -73,11 +77,11 @@ error                :
 Nonterminals, with rules where they appear
 
 bloc                 : 1 2 7 8 9 10 11
-expression           : 4 5 7 8 9 9 9 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 24 24 25
-param                : 11 28
+expression           : 4 5 7 8 9 9 9 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 26 26 27
+param                : 11 30
 start                : 0
 statement            : 2 3
-strings              : 6 30
+strings              : 6 32
 
 Parsing method: LALR
 
@@ -233,14 +237,16 @@ state 13
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -259,14 +265,16 @@ state 14
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     RPAREN          shift and go to state 27
     MINUS           shift and go to state 24
@@ -285,14 +293,16 @@ state 15
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -304,8 +314,8 @@ state 15
 state 16
 
     (6) statement -> PRINTSTR LPAREN . strings RPAREN
-    (30) strings -> . NAME strings
-    (31) strings -> . NAME
+    (32) strings -> . NAME strings
+    (33) strings -> . NAME
 
     NAME            shift and go to state 31
 
@@ -320,14 +330,16 @@ state 17
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -345,14 +357,16 @@ state 18
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -393,20 +407,22 @@ state 21
 
 state 22
 
-    (27) expression -> NAME .
+    (29) expression -> NAME .
 
-    PLUS            reduce using rule 27 (expression -> NAME .)
-    MINUS           reduce using rule 27 (expression -> NAME .)
-    TIMES           reduce using rule 27 (expression -> NAME .)
-    DIVIDE          reduce using rule 27 (expression -> NAME .)
-    INF             reduce using rule 27 (expression -> NAME .)
-    SUP             reduce using rule 27 (expression -> NAME .)
-    AND             reduce using rule 27 (expression -> NAME .)
-    OR              reduce using rule 27 (expression -> NAME .)
-    BOOLEQUAL       reduce using rule 27 (expression -> NAME .)
-    COMA            reduce using rule 27 (expression -> NAME .)
-    SEMI            reduce using rule 27 (expression -> NAME .)
-    RPAREN          reduce using rule 27 (expression -> NAME .)
+    PLUS            reduce using rule 29 (expression -> NAME .)
+    MINUS           reduce using rule 29 (expression -> NAME .)
+    TIMES           reduce using rule 29 (expression -> NAME .)
+    DIVIDE          reduce using rule 29 (expression -> NAME .)
+    INF             reduce using rule 29 (expression -> NAME .)
+    SUP             reduce using rule 29 (expression -> NAME .)
+    INFEQUAL        reduce using rule 29 (expression -> NAME .)
+    SUPEQUAL        reduce using rule 29 (expression -> NAME .)
+    AND             reduce using rule 29 (expression -> NAME .)
+    OR              reduce using rule 29 (expression -> NAME .)
+    BOOLEQUAL       reduce using rule 29 (expression -> NAME .)
+    COMA            reduce using rule 29 (expression -> NAME .)
+    SEMI            reduce using rule 29 (expression -> NAME .)
+    RPAREN          reduce using rule 29 (expression -> NAME .)
 
 
 state 23
@@ -418,10 +434,12 @@ state 23
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     SEMI            reduce using rule 4 (statement -> NAME EQUALS expression .)
     PLUS            shift and go to state 36
@@ -430,78 +448,86 @@ state 23
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
 state 24
 
-    (23) expression -> MINUS . expression
+    (25) expression -> MINUS . expression
     (14) expression -> . expression PLUS expression
     (15) expression -> . expression MINUS expression
     (16) expression -> . expression TIMES expression
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 46
+    expression                     shift and go to state 48
 
 state 25
 
-    (25) expression -> LPAREN . expression RPAREN
+    (27) expression -> LPAREN . expression RPAREN
     (14) expression -> . expression PLUS expression
     (15) expression -> . expression MINUS expression
     (16) expression -> . expression TIMES expression
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 47
+    expression                     shift and go to state 49
 
 state 26
 
-    (26) expression -> NUMBER .
+    (28) expression -> NUMBER .
 
-    PLUS            reduce using rule 26 (expression -> NUMBER .)
-    MINUS           reduce using rule 26 (expression -> NUMBER .)
-    TIMES           reduce using rule 26 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 26 (expression -> NUMBER .)
-    INF             reduce using rule 26 (expression -> NUMBER .)
-    SUP             reduce using rule 26 (expression -> NUMBER .)
-    AND             reduce using rule 26 (expression -> NUMBER .)
-    OR              reduce using rule 26 (expression -> NUMBER .)
-    BOOLEQUAL       reduce using rule 26 (expression -> NUMBER .)
-    COMA            reduce using rule 26 (expression -> NUMBER .)
-    SEMI            reduce using rule 26 (expression -> NUMBER .)
-    RPAREN          reduce using rule 26 (expression -> NUMBER .)
+    PLUS            reduce using rule 28 (expression -> NUMBER .)
+    MINUS           reduce using rule 28 (expression -> NUMBER .)
+    TIMES           reduce using rule 28 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 28 (expression -> NUMBER .)
+    INF             reduce using rule 28 (expression -> NUMBER .)
+    SUP             reduce using rule 28 (expression -> NUMBER .)
+    INFEQUAL        reduce using rule 28 (expression -> NUMBER .)
+    SUPEQUAL        reduce using rule 28 (expression -> NUMBER .)
+    AND             reduce using rule 28 (expression -> NUMBER .)
+    OR              reduce using rule 28 (expression -> NUMBER .)
+    BOOLEQUAL       reduce using rule 28 (expression -> NUMBER .)
+    COMA            reduce using rule 28 (expression -> NUMBER .)
+    SEMI            reduce using rule 28 (expression -> NUMBER .)
+    RPAREN          reduce using rule 28 (expression -> NUMBER .)
 
 
 state 27
@@ -520,22 +546,26 @@ state 28
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 48
+    RPAREN          shift and go to state 50
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
 state 29
@@ -547,42 +577,46 @@ state 29
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 49
+    RPAREN          shift and go to state 51
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
 state 30
 
     (6) statement -> PRINTSTR LPAREN strings . RPAREN
 
-    RPAREN          shift and go to state 50
+    RPAREN          shift and go to state 52
 
 
 state 31
 
-    (30) strings -> NAME . strings
-    (31) strings -> NAME .
-    (30) strings -> . NAME strings
-    (31) strings -> . NAME
+    (32) strings -> NAME . strings
+    (33) strings -> NAME .
+    (32) strings -> . NAME strings
+    (33) strings -> . NAME
 
-    RPAREN          reduce using rule 31 (strings -> NAME .)
+    RPAREN          reduce using rule 33 (strings -> NAME .)
     NAME            shift and go to state 31
 
-    strings                        shift and go to state 51
+    strings                        shift and go to state 53
 
 state 32
 
@@ -593,22 +627,26 @@ state 32
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 52
+    RPAREN          shift and go to state 54
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
 state 33
@@ -620,42 +658,46 @@ state 33
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 53
+    RPAREN          shift and go to state 55
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
 state 34
 
     (9) statement -> FOR LPAREN NAME . EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
 
-    EQUALS          shift and go to state 54
+    EQUALS          shift and go to state 56
 
 
 state 35
 
     (10) statement -> FUNC NAME LPAREN . RPAREN LACCOLADE bloc RACCOLADE
     (11) statement -> FUNC NAME LPAREN . param RPAREN LACCOLADE bloc RACCOLADE
-    (28) param -> . NAME COMA param
-    (29) param -> . NAME
+    (30) param -> . NAME COMA param
+    (31) param -> . NAME
 
-    RPAREN          shift and go to state 56
-    NAME            shift and go to state 55
+    RPAREN          shift and go to state 58
+    NAME            shift and go to state 57
 
-    param                          shift and go to state 57
+    param                          shift and go to state 59
 
 state 36
 
@@ -666,21 +708,23 @@ state 36
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 58
+    expression                     shift and go to state 60
 
 state 37
 
@@ -691,21 +735,23 @@ state 37
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 59
+    expression                     shift and go to state 61
 
 state 38
 
@@ -716,21 +762,23 @@ state 38
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 60
+    expression                     shift and go to state 62
 
 state 39
 
@@ -741,21 +789,23 @@ state 39
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 61
+    expression                     shift and go to state 63
 
 state 40
 
@@ -766,21 +816,23 @@ state 40
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 62
+    expression                     shift and go to state 64
 
 state 41
 
@@ -791,64 +843,16 @@ state 41
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
-
-    MINUS           shift and go to state 24
-    LPAREN          shift and go to state 25
-    NUMBER          shift and go to state 26
-    NAME            shift and go to state 22
-
-    expression                     shift and go to state 63
-
-state 42
-
-    (20) expression -> expression AND . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression INF expression
-    (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
-
-    MINUS           shift and go to state 24
-    LPAREN          shift and go to state 25
-    NUMBER          shift and go to state 26
-    NAME            shift and go to state 22
-
-    expression                     shift and go to state 64
-
-state 43
-
-    (21) expression -> expression OR . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression INF expression
-    (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -857,23 +861,25 @@ state 43
 
     expression                     shift and go to state 65
 
-state 44
+state 42
 
-    (22) expression -> expression BOOLEQUAL . expression
+    (20) expression -> expression INFEQUAL . expression
     (14) expression -> . expression PLUS expression
     (15) expression -> . expression MINUS expression
     (16) expression -> . expression TIMES expression
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -882,23 +888,25 @@ state 44
 
     expression                     shift and go to state 66
 
-state 45
+state 43
 
-    (24) expression -> expression COMA . expression
+    (21) expression -> expression SUPEQUAL . expression
     (14) expression -> . expression PLUS expression
     (15) expression -> . expression MINUS expression
     (16) expression -> . expression TIMES expression
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -907,131 +915,106 @@ state 45
 
     expression                     shift and go to state 67
 
-state 46
+state 44
 
-    (23) expression -> MINUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . INF expression
-    (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
-
-    PLUS            reduce using rule 23 (expression -> MINUS expression .)
-    MINUS           reduce using rule 23 (expression -> MINUS expression .)
-    INF             reduce using rule 23 (expression -> MINUS expression .)
-    SUP             reduce using rule 23 (expression -> MINUS expression .)
-    AND             reduce using rule 23 (expression -> MINUS expression .)
-    OR              reduce using rule 23 (expression -> MINUS expression .)
-    BOOLEQUAL       reduce using rule 23 (expression -> MINUS expression .)
-    COMA            reduce using rule 23 (expression -> MINUS expression .)
-    SEMI            reduce using rule 23 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 23 (expression -> MINUS expression .)
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-
-  ! TIMES           [ reduce using rule 23 (expression -> MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 23 (expression -> MINUS expression .) ]
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! INF             [ shift and go to state 40 ]
-  ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
-
-
-state 47
-
-    (25) expression -> LPAREN expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . INF expression
-    (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
-
-    RPAREN          shift and go to state 68
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    INF             shift and go to state 40
-    SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
-
-
-state 48
-
-    (13) statement -> NAME LPAREN expression RPAREN .
-
-    SEMI            reduce using rule 13 (statement -> NAME LPAREN expression RPAREN .)
-
-
-state 49
-
-    (5) statement -> PRINT LPAREN expression RPAREN .
-
-    SEMI            reduce using rule 5 (statement -> PRINT LPAREN expression RPAREN .)
-
-
-state 50
-
-    (6) statement -> PRINTSTR LPAREN strings RPAREN .
-
-    SEMI            reduce using rule 6 (statement -> PRINTSTR LPAREN strings RPAREN .)
-
-
-state 51
-
-    (30) strings -> NAME strings .
-
-    RPAREN          reduce using rule 30 (strings -> NAME strings .)
-
-
-state 52
-
-    (7) statement -> IF LPAREN expression RPAREN . LACCOLADE bloc RACCOLADE
-
-    LACCOLADE       shift and go to state 69
-
-
-state 53
-
-    (8) statement -> WHILE LPAREN expression RPAREN . LACCOLADE bloc RACCOLADE
-
-    LACCOLADE       shift and go to state 70
-
-
-state 54
-
-    (9) statement -> FOR LPAREN NAME EQUALS . expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (22) expression -> expression AND . expression
     (14) expression -> . expression PLUS expression
     (15) expression -> . expression MINUS expression
     (16) expression -> . expression TIMES expression
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+    NAME            shift and go to state 22
+
+    expression                     shift and go to state 68
+
+state 45
+
+    (23) expression -> expression OR . expression
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+    NAME            shift and go to state 22
+
+    expression                     shift and go to state 69
+
+state 46
+
+    (24) expression -> expression BOOLEQUAL . expression
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+    NAME            shift and go to state 22
+
+    expression                     shift and go to state 70
+
+state 47
+
+    (26) expression -> expression COMA . expression
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
@@ -1040,30 +1023,175 @@ state 54
 
     expression                     shift and go to state 71
 
-state 55
+state 48
 
-    (28) param -> NAME . COMA param
-    (29) param -> NAME .
+    (25) expression -> MINUS expression .
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    COMA            shift and go to state 72
-    RPAREN          reduce using rule 29 (param -> NAME .)
+    PLUS            reduce using rule 25 (expression -> MINUS expression .)
+    MINUS           reduce using rule 25 (expression -> MINUS expression .)
+    INF             reduce using rule 25 (expression -> MINUS expression .)
+    SUP             reduce using rule 25 (expression -> MINUS expression .)
+    INFEQUAL        reduce using rule 25 (expression -> MINUS expression .)
+    SUPEQUAL        reduce using rule 25 (expression -> MINUS expression .)
+    AND             reduce using rule 25 (expression -> MINUS expression .)
+    OR              reduce using rule 25 (expression -> MINUS expression .)
+    BOOLEQUAL       reduce using rule 25 (expression -> MINUS expression .)
+    COMA            reduce using rule 25 (expression -> MINUS expression .)
+    SEMI            reduce using rule 25 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 25 (expression -> MINUS expression .)
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+
+  ! TIMES           [ reduce using rule 25 (expression -> MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 25 (expression -> MINUS expression .) ]
+  ! PLUS            [ shift and go to state 36 ]
+  ! MINUS           [ shift and go to state 37 ]
+  ! INF             [ shift and go to state 40 ]
+  ! SUP             [ shift and go to state 41 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 56
+state 49
 
-    (10) statement -> FUNC NAME LPAREN RPAREN . LACCOLADE bloc RACCOLADE
+    (27) expression -> LPAREN expression . RPAREN
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    RPAREN          shift and go to state 72
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+    INF             shift and go to state 40
+    SUP             shift and go to state 41
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
+
+
+state 50
+
+    (13) statement -> NAME LPAREN expression RPAREN .
+
+    SEMI            reduce using rule 13 (statement -> NAME LPAREN expression RPAREN .)
+
+
+state 51
+
+    (5) statement -> PRINT LPAREN expression RPAREN .
+
+    SEMI            reduce using rule 5 (statement -> PRINT LPAREN expression RPAREN .)
+
+
+state 52
+
+    (6) statement -> PRINTSTR LPAREN strings RPAREN .
+
+    SEMI            reduce using rule 6 (statement -> PRINTSTR LPAREN strings RPAREN .)
+
+
+state 53
+
+    (32) strings -> NAME strings .
+
+    RPAREN          reduce using rule 32 (strings -> NAME strings .)
+
+
+state 54
+
+    (7) statement -> IF LPAREN expression RPAREN . LACCOLADE bloc RACCOLADE
 
     LACCOLADE       shift and go to state 73
 
 
+state 55
+
+    (8) statement -> WHILE LPAREN expression RPAREN . LACCOLADE bloc RACCOLADE
+
+    LACCOLADE       shift and go to state 74
+
+
+state 56
+
+    (9) statement -> FOR LPAREN NAME EQUALS . expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+    NAME            shift and go to state 22
+
+    expression                     shift and go to state 75
+
 state 57
 
-    (11) statement -> FUNC NAME LPAREN param . RPAREN LACCOLADE bloc RACCOLADE
+    (30) param -> NAME . COMA param
+    (31) param -> NAME .
 
-    RPAREN          shift and go to state 74
+    COMA            shift and go to state 76
+    RPAREN          reduce using rule 31 (param -> NAME .)
 
 
 state 58
+
+    (10) statement -> FUNC NAME LPAREN RPAREN . LACCOLADE bloc RACCOLADE
+
+    LACCOLADE       shift and go to state 77
+
+
+state 59
+
+    (11) statement -> FUNC NAME LPAREN param . RPAREN LACCOLADE bloc RACCOLADE
+
+    RPAREN          shift and go to state 78
+
+
+state 60
 
     (14) expression -> expression PLUS expression .
     (14) expression -> expression . PLUS expression
@@ -1072,15 +1200,19 @@ state 58
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     PLUS            reduce using rule 14 (expression -> expression PLUS expression .)
     MINUS           reduce using rule 14 (expression -> expression PLUS expression .)
     INF             reduce using rule 14 (expression -> expression PLUS expression .)
     SUP             reduce using rule 14 (expression -> expression PLUS expression .)
+    INFEQUAL        reduce using rule 14 (expression -> expression PLUS expression .)
+    SUPEQUAL        reduce using rule 14 (expression -> expression PLUS expression .)
     AND             reduce using rule 14 (expression -> expression PLUS expression .)
     OR              reduce using rule 14 (expression -> expression PLUS expression .)
     BOOLEQUAL       reduce using rule 14 (expression -> expression PLUS expression .)
@@ -1096,13 +1228,15 @@ state 58
   ! MINUS           [ shift and go to state 37 ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 59
+state 61
 
     (15) expression -> expression MINUS expression .
     (14) expression -> expression . PLUS expression
@@ -1111,15 +1245,19 @@ state 59
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     PLUS            reduce using rule 15 (expression -> expression MINUS expression .)
     MINUS           reduce using rule 15 (expression -> expression MINUS expression .)
     INF             reduce using rule 15 (expression -> expression MINUS expression .)
     SUP             reduce using rule 15 (expression -> expression MINUS expression .)
+    INFEQUAL        reduce using rule 15 (expression -> expression MINUS expression .)
+    SUPEQUAL        reduce using rule 15 (expression -> expression MINUS expression .)
     AND             reduce using rule 15 (expression -> expression MINUS expression .)
     OR              reduce using rule 15 (expression -> expression MINUS expression .)
     BOOLEQUAL       reduce using rule 15 (expression -> expression MINUS expression .)
@@ -1135,13 +1273,15 @@ state 59
   ! MINUS           [ shift and go to state 37 ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 60
+state 62
 
     (16) expression -> expression TIMES expression .
     (14) expression -> expression . PLUS expression
@@ -1150,10 +1290,12 @@ state 60
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     PLUS            reduce using rule 16 (expression -> expression TIMES expression .)
     MINUS           reduce using rule 16 (expression -> expression TIMES expression .)
@@ -1161,6 +1303,8 @@ state 60
     DIVIDE          reduce using rule 16 (expression -> expression TIMES expression .)
     INF             reduce using rule 16 (expression -> expression TIMES expression .)
     SUP             reduce using rule 16 (expression -> expression TIMES expression .)
+    INFEQUAL        reduce using rule 16 (expression -> expression TIMES expression .)
+    SUPEQUAL        reduce using rule 16 (expression -> expression TIMES expression .)
     AND             reduce using rule 16 (expression -> expression TIMES expression .)
     OR              reduce using rule 16 (expression -> expression TIMES expression .)
     BOOLEQUAL       reduce using rule 16 (expression -> expression TIMES expression .)
@@ -1174,13 +1318,15 @@ state 60
   ! DIVIDE          [ shift and go to state 39 ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 61
+state 63
 
     (17) expression -> expression DIVIDE expression .
     (14) expression -> expression . PLUS expression
@@ -1189,10 +1335,12 @@ state 61
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     PLUS            reduce using rule 17 (expression -> expression DIVIDE expression .)
     MINUS           reduce using rule 17 (expression -> expression DIVIDE expression .)
@@ -1200,6 +1348,8 @@ state 61
     DIVIDE          reduce using rule 17 (expression -> expression DIVIDE expression .)
     INF             reduce using rule 17 (expression -> expression DIVIDE expression .)
     SUP             reduce using rule 17 (expression -> expression DIVIDE expression .)
+    INFEQUAL        reduce using rule 17 (expression -> expression DIVIDE expression .)
+    SUPEQUAL        reduce using rule 17 (expression -> expression DIVIDE expression .)
     AND             reduce using rule 17 (expression -> expression DIVIDE expression .)
     OR              reduce using rule 17 (expression -> expression DIVIDE expression .)
     BOOLEQUAL       reduce using rule 17 (expression -> expression DIVIDE expression .)
@@ -1213,13 +1363,15 @@ state 61
   ! DIVIDE          [ shift and go to state 39 ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 62
+state 64
 
     (18) expression -> expression INF expression .
     (14) expression -> expression . PLUS expression
@@ -1228,13 +1380,17 @@ state 62
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     INF             reduce using rule 18 (expression -> expression INF expression .)
     SUP             reduce using rule 18 (expression -> expression INF expression .)
+    INFEQUAL        reduce using rule 18 (expression -> expression INF expression .)
+    SUPEQUAL        reduce using rule 18 (expression -> expression INF expression .)
     AND             reduce using rule 18 (expression -> expression INF expression .)
     OR              reduce using rule 18 (expression -> expression INF expression .)
     BOOLEQUAL       reduce using rule 18 (expression -> expression INF expression .)
@@ -1252,13 +1408,15 @@ state 62
   ! DIVIDE          [ reduce using rule 18 (expression -> expression INF expression .) ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
-state 63
+state 65
 
     (19) expression -> expression SUP expression .
     (14) expression -> expression . PLUS expression
@@ -1267,13 +1425,17 @@ state 63
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
     INF             reduce using rule 19 (expression -> expression SUP expression .)
     SUP             reduce using rule 19 (expression -> expression SUP expression .)
+    INFEQUAL        reduce using rule 19 (expression -> expression SUP expression .)
+    SUPEQUAL        reduce using rule 19 (expression -> expression SUP expression .)
     AND             reduce using rule 19 (expression -> expression SUP expression .)
     OR              reduce using rule 19 (expression -> expression SUP expression .)
     BOOLEQUAL       reduce using rule 19 (expression -> expression SUP expression .)
@@ -1291,142 +1453,254 @@ state 63
   ! DIVIDE          [ reduce using rule 19 (expression -> expression SUP expression .) ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
-
-
-state 64
-
-    (20) expression -> expression AND expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . INF expression
-    (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
-
-    AND             reduce using rule 20 (expression -> expression AND expression .)
-    OR              reduce using rule 20 (expression -> expression AND expression .)
-    COMA            reduce using rule 20 (expression -> expression AND expression .)
-    SEMI            reduce using rule 20 (expression -> expression AND expression .)
-    RPAREN          reduce using rule 20 (expression -> expression AND expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    INF             shift and go to state 40
-    SUP             shift and go to state 41
-    BOOLEQUAL       shift and go to state 44
-
-  ! PLUS            [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! TIMES           [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! DIVIDE          [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! INF             [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! SUP             [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! BOOLEQUAL       [ reduce using rule 20 (expression -> expression AND expression .) ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! COMA            [ shift and go to state 45 ]
-
-
-state 65
-
-    (21) expression -> expression OR expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . INF expression
-    (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
-
-    OR              reduce using rule 21 (expression -> expression OR expression .)
-    COMA            reduce using rule 21 (expression -> expression OR expression .)
-    SEMI            reduce using rule 21 (expression -> expression OR expression .)
-    RPAREN          reduce using rule 21 (expression -> expression OR expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    INF             shift and go to state 40
-    SUP             shift and go to state 41
-    AND             shift and go to state 42
-    BOOLEQUAL       shift and go to state 44
-
-  ! PLUS            [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! MINUS           [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! TIMES           [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! DIVIDE          [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! INF             [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! SUP             [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! AND             [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! BOOLEQUAL       [ reduce using rule 21 (expression -> expression OR expression .) ]
-  ! OR              [ shift and go to state 43 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
 state 66
 
-    (22) expression -> expression BOOLEQUAL expression .
+    (20) expression -> expression INFEQUAL expression .
     (14) expression -> expression . PLUS expression
     (15) expression -> expression . MINUS expression
     (16) expression -> expression . TIMES expression
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    INF             reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    SUP             reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    AND             reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    OR              reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    BOOLEQUAL       reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    COMA            reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    SEMI            reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
-    RPAREN          reduce using rule 22 (expression -> expression BOOLEQUAL expression .)
+    INF             reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    SUP             reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    INFEQUAL        reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    SUPEQUAL        reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    AND             reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    OR              reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    BOOLEQUAL       reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    COMA            reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    SEMI            reduce using rule 20 (expression -> expression INFEQUAL expression .)
+    RPAREN          reduce using rule 20 (expression -> expression INFEQUAL expression .)
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
 
-  ! PLUS            [ reduce using rule 22 (expression -> expression BOOLEQUAL expression .) ]
-  ! MINUS           [ reduce using rule 22 (expression -> expression BOOLEQUAL expression .) ]
-  ! TIMES           [ reduce using rule 22 (expression -> expression BOOLEQUAL expression .) ]
-  ! DIVIDE          [ reduce using rule 22 (expression -> expression BOOLEQUAL expression .) ]
+  ! PLUS            [ reduce using rule 20 (expression -> expression INFEQUAL expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression INFEQUAL expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression INFEQUAL expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression INFEQUAL expression .) ]
   ! INF             [ shift and go to state 40 ]
   ! SUP             [ shift and go to state 41 ]
-  ! AND             [ shift and go to state 42 ]
-  ! OR              [ shift and go to state 43 ]
-  ! BOOLEQUAL       [ shift and go to state 44 ]
-  ! COMA            [ shift and go to state 45 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
 
 
 state 67
 
-    (24) expression -> expression COMA expression .
+    (21) expression -> expression SUPEQUAL expression .
     (14) expression -> expression . PLUS expression
     (15) expression -> expression . MINUS expression
     (16) expression -> expression . TIMES expression
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    INF             reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    SUP             reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    INFEQUAL        reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    SUPEQUAL        reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    AND             reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    OR              reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    BOOLEQUAL       reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    COMA            reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    SEMI            reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    RPAREN          reduce using rule 21 (expression -> expression SUPEQUAL expression .)
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+
+  ! PLUS            [ reduce using rule 21 (expression -> expression SUPEQUAL expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression SUPEQUAL expression .) ]
+  ! TIMES           [ reduce using rule 21 (expression -> expression SUPEQUAL expression .) ]
+  ! DIVIDE          [ reduce using rule 21 (expression -> expression SUPEQUAL expression .) ]
+  ! INF             [ shift and go to state 40 ]
+  ! SUP             [ shift and go to state 41 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
+
+
+state 68
+
+    (22) expression -> expression AND expression .
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    AND             reduce using rule 22 (expression -> expression AND expression .)
+    OR              reduce using rule 22 (expression -> expression AND expression .)
+    COMA            reduce using rule 22 (expression -> expression AND expression .)
+    SEMI            reduce using rule 22 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 22 (expression -> expression AND expression .)
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+    INF             shift and go to state 40
+    SUP             shift and go to state 41
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    BOOLEQUAL       shift and go to state 46
+
+  ! PLUS            [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! INF             [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! SUP             [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! INFEQUAL        [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! SUPEQUAL        [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! BOOLEQUAL       [ reduce using rule 22 (expression -> expression AND expression .) ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! COMA            [ shift and go to state 47 ]
+
+
+state 69
+
+    (23) expression -> expression OR expression .
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    OR              reduce using rule 23 (expression -> expression OR expression .)
+    COMA            reduce using rule 23 (expression -> expression OR expression .)
+    SEMI            reduce using rule 23 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 23 (expression -> expression OR expression .)
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+    INF             shift and go to state 40
+    SUP             shift and go to state 41
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    BOOLEQUAL       shift and go to state 46
+
+  ! PLUS            [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! INF             [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! SUP             [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! INFEQUAL        [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! SUPEQUAL        [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! AND             [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! BOOLEQUAL       [ reduce using rule 23 (expression -> expression OR expression .) ]
+  ! OR              [ shift and go to state 45 ]
+  ! COMA            [ shift and go to state 47 ]
+
+
+state 70
+
+    (24) expression -> expression BOOLEQUAL expression .
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    INF             reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    SUP             reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    INFEQUAL        reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    SUPEQUAL        reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    AND             reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    OR              reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    BOOLEQUAL       reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    COMA            reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    SEMI            reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    RPAREN          reduce using rule 24 (expression -> expression BOOLEQUAL expression .)
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+
+  ! PLUS            [ reduce using rule 24 (expression -> expression BOOLEQUAL expression .) ]
+  ! MINUS           [ reduce using rule 24 (expression -> expression BOOLEQUAL expression .) ]
+  ! TIMES           [ reduce using rule 24 (expression -> expression BOOLEQUAL expression .) ]
+  ! DIVIDE          [ reduce using rule 24 (expression -> expression BOOLEQUAL expression .) ]
+  ! INF             [ shift and go to state 40 ]
+  ! SUP             [ shift and go to state 41 ]
+  ! INFEQUAL        [ shift and go to state 42 ]
+  ! SUPEQUAL        [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+  ! OR              [ shift and go to state 45 ]
+  ! BOOLEQUAL       [ shift and go to state 46 ]
+  ! COMA            [ shift and go to state 47 ]
+
+
+state 71
+
+    (26) expression -> expression COMA expression .
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
@@ -1434,147 +1708,64 @@ state 67
   ! shift/reduce conflict for DIVIDE resolved as shift
   ! shift/reduce conflict for INF resolved as shift
   ! shift/reduce conflict for SUP resolved as shift
+  ! shift/reduce conflict for INFEQUAL resolved as shift
+  ! shift/reduce conflict for SUPEQUAL resolved as shift
   ! shift/reduce conflict for AND resolved as shift
   ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for BOOLEQUAL resolved as shift
   ! shift/reduce conflict for COMA resolved as shift
-    SEMI            reduce using rule 24 (expression -> expression COMA expression .)
-    RPAREN          reduce using rule 24 (expression -> expression COMA expression .)
+    SEMI            reduce using rule 26 (expression -> expression COMA expression .)
+    RPAREN          reduce using rule 26 (expression -> expression COMA expression .)
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
-  ! PLUS            [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! MINUS           [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! TIMES           [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! DIVIDE          [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! INF             [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! SUP             [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! AND             [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! OR              [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! BOOLEQUAL       [ reduce using rule 24 (expression -> expression COMA expression .) ]
-  ! COMA            [ reduce using rule 24 (expression -> expression COMA expression .) ]
-
-
-state 68
-
-    (25) expression -> LPAREN expression RPAREN .
-
-    PLUS            reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    INF             reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    SUP             reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    AND             reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    OR              reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    BOOLEQUAL       reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    COMA            reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    SEMI            reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 25 (expression -> LPAREN expression RPAREN .)
-
-
-state 69
-
-    (7) statement -> IF LPAREN expression RPAREN LACCOLADE . bloc RACCOLADE
-    (2) bloc -> . bloc statement SEMI
-    (3) bloc -> . statement SEMI
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . PRINT LPAREN expression RPAREN
-    (6) statement -> . PRINTSTR LPAREN strings RPAREN
-    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
-    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
-    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
-    (12) statement -> . NAME LPAREN RPAREN
-    (13) statement -> . NAME LPAREN expression RPAREN
-
-    NAME            shift and go to state 4
-    PRINT           shift and go to state 5
-    PRINTSTR        shift and go to state 6
-    IF              shift and go to state 7
-    WHILE           shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
-
-    bloc                           shift and go to state 75
-    statement                      shift and go to state 3
-
-state 70
-
-    (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE . bloc RACCOLADE
-    (2) bloc -> . bloc statement SEMI
-    (3) bloc -> . statement SEMI
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . PRINT LPAREN expression RPAREN
-    (6) statement -> . PRINTSTR LPAREN strings RPAREN
-    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
-    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
-    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
-    (12) statement -> . NAME LPAREN RPAREN
-    (13) statement -> . NAME LPAREN expression RPAREN
-
-    NAME            shift and go to state 4
-    PRINT           shift and go to state 5
-    PRINTSTR        shift and go to state 6
-    IF              shift and go to state 7
-    WHILE           shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
-
-    bloc                           shift and go to state 76
-    statement                      shift and go to state 3
-
-state 71
-
-    (9) statement -> FOR LPAREN NAME EQUALS expression . SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . INF expression
-    (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
-
-    SEMI            shift and go to state 77
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    INF             shift and go to state 40
-    SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+  ! PLUS            [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! MINUS           [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! TIMES           [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! DIVIDE          [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! INF             [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! SUP             [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! INFEQUAL        [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! SUPEQUAL        [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! AND             [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! OR              [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! BOOLEQUAL       [ reduce using rule 26 (expression -> expression COMA expression .) ]
+  ! COMA            [ reduce using rule 26 (expression -> expression COMA expression .) ]
 
 
 state 72
 
-    (28) param -> NAME COMA . param
-    (28) param -> . NAME COMA param
-    (29) param -> . NAME
+    (27) expression -> LPAREN expression RPAREN .
 
-    NAME            shift and go to state 55
+    PLUS            reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    INF             reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    SUP             reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    INFEQUAL        reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    SUPEQUAL        reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    BOOLEQUAL       reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    COMA            reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    SEMI            reduce using rule 27 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 27 (expression -> LPAREN expression RPAREN .)
 
-    param                          shift and go to state 78
 
 state 73
 
-    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE . bloc RACCOLADE
+    (7) statement -> IF LPAREN expression RPAREN LACCOLADE . bloc RACCOLADE
     (2) bloc -> . bloc statement SEMI
     (3) bloc -> . statement SEMI
     (4) statement -> . NAME EQUALS expression
@@ -1601,12 +1792,107 @@ state 73
 
 state 74
 
-    (11) statement -> FUNC NAME LPAREN param RPAREN . LACCOLADE bloc RACCOLADE
+    (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE . bloc RACCOLADE
+    (2) bloc -> . bloc statement SEMI
+    (3) bloc -> . statement SEMI
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . PRINT LPAREN expression RPAREN
+    (6) statement -> . PRINTSTR LPAREN strings RPAREN
+    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
+    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
+    (12) statement -> . NAME LPAREN RPAREN
+    (13) statement -> . NAME LPAREN expression RPAREN
 
-    LACCOLADE       shift and go to state 80
+    NAME            shift and go to state 4
+    PRINT           shift and go to state 5
+    PRINTSTR        shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    FUNC            shift and go to state 10
 
+    bloc                           shift and go to state 80
+    statement                      shift and go to state 3
 
 state 75
+
+    (9) statement -> FOR LPAREN NAME EQUALS expression . SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    SEMI            shift and go to state 81
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+    INF             shift and go to state 40
+    SUP             shift and go to state 41
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
+
+
+state 76
+
+    (30) param -> NAME COMA . param
+    (30) param -> . NAME COMA param
+    (31) param -> . NAME
+
+    NAME            shift and go to state 57
+
+    param                          shift and go to state 82
+
+state 77
+
+    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE . bloc RACCOLADE
+    (2) bloc -> . bloc statement SEMI
+    (3) bloc -> . statement SEMI
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . PRINT LPAREN expression RPAREN
+    (6) statement -> . PRINTSTR LPAREN strings RPAREN
+    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
+    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
+    (12) statement -> . NAME LPAREN RPAREN
+    (13) statement -> . NAME LPAREN expression RPAREN
+
+    NAME            shift and go to state 4
+    PRINT           shift and go to state 5
+    PRINTSTR        shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    FUNC            shift and go to state 10
+
+    bloc                           shift and go to state 83
+    statement                      shift and go to state 3
+
+state 78
+
+    (11) statement -> FUNC NAME LPAREN param RPAREN . LACCOLADE bloc RACCOLADE
+
+    LACCOLADE       shift and go to state 84
+
+
+state 79
 
     (7) statement -> IF LPAREN expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1621,7 +1907,7 @@ state 75
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 81
+    RACCOLADE       shift and go to state 85
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1632,7 +1918,7 @@ state 75
 
     statement                      shift and go to state 11
 
-state 76
+state 80
 
     (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1647,7 +1933,7 @@ state 76
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 82
+    RACCOLADE       shift and go to state 86
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1658,7 +1944,7 @@ state 76
 
     statement                      shift and go to state 11
 
-state 77
+state 81
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI . expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> . expression PLUS expression
@@ -1667,30 +1953,32 @@ state 77
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 83
+    expression                     shift and go to state 87
 
-state 78
+state 82
 
-    (28) param -> NAME COMA param .
+    (30) param -> NAME COMA param .
 
-    RPAREN          reduce using rule 28 (param -> NAME COMA param .)
+    RPAREN          reduce using rule 30 (param -> NAME COMA param .)
 
 
-state 79
+state 83
 
     (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1705,7 +1993,7 @@ state 79
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 84
+    RACCOLADE       shift and go to state 88
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1716,7 +2004,7 @@ state 79
 
     statement                      shift and go to state 11
 
-state 80
+state 84
 
     (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE . bloc RACCOLADE
     (2) bloc -> . bloc statement SEMI
@@ -1740,24 +2028,24 @@ state 80
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 85
+    bloc                           shift and go to state 89
     statement                      shift and go to state 3
 
-state 81
+state 85
 
     (7) statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
 
     SEMI            reduce using rule 7 (statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
 
 
-state 82
+state 86
 
     (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
 
     SEMI            reduce using rule 8 (statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
 
 
-state 83
+state 87
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression . SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> expression . PLUS expression
@@ -1766,32 +2054,36 @@ state 83
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    SEMI            shift and go to state 86
+    SEMI            shift and go to state 90
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
-state 84
+state 88
 
     (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .
 
     SEMI            reduce using rule 10 (statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .)
 
 
-state 85
+state 89
 
     (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1806,7 +2098,7 @@ state 85
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 87
+    RACCOLADE       shift and go to state 91
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1817,28 +2109,28 @@ state 85
 
     statement                      shift and go to state 11
 
-state 86
+state 90
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI . NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
 
-    NAME            shift and go to state 88
+    NAME            shift and go to state 92
 
 
-state 87
+state 91
 
     (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE .
 
     SEMI            reduce using rule 11 (statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE .)
 
 
-state 88
+state 92
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME . EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
 
-    EQUALS          shift and go to state 89
+    EQUALS          shift and go to state 93
 
 
-state 89
+state 93
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS . expression RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> . expression PLUS expression
@@ -1847,23 +2139,25 @@ state 89
     (17) expression -> . expression DIVIDE expression
     (18) expression -> . expression INF expression
     (19) expression -> . expression SUP expression
-    (20) expression -> . expression AND expression
-    (21) expression -> . expression OR expression
-    (22) expression -> . expression BOOLEQUAL expression
-    (23) expression -> . MINUS expression
-    (24) expression -> . expression COMA expression
-    (25) expression -> . LPAREN expression RPAREN
-    (26) expression -> . NUMBER
-    (27) expression -> . NAME
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
 
     MINUS           shift and go to state 24
     LPAREN          shift and go to state 25
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 90
+    expression                     shift and go to state 94
 
-state 90
+state 94
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression . RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> expression . PLUS expression
@@ -1872,32 +2166,36 @@ state 90
     (17) expression -> expression . DIVIDE expression
     (18) expression -> expression . INF expression
     (19) expression -> expression . SUP expression
-    (20) expression -> expression . AND expression
-    (21) expression -> expression . OR expression
-    (22) expression -> expression . BOOLEQUAL expression
-    (24) expression -> expression . COMA expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 91
+    RPAREN          shift and go to state 95
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
     DIVIDE          shift and go to state 39
     INF             shift and go to state 40
     SUP             shift and go to state 41
-    AND             shift and go to state 42
-    OR              shift and go to state 43
-    BOOLEQUAL       shift and go to state 44
-    COMA            shift and go to state 45
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
 
 
-state 91
+state 95
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN . LACCOLADE bloc RACCOLADE
 
-    LACCOLADE       shift and go to state 92
+    LACCOLADE       shift and go to state 96
 
 
-state 92
+state 96
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE . bloc RACCOLADE
     (2) bloc -> . bloc statement SEMI
@@ -1921,10 +2219,10 @@ state 92
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 93
+    bloc                           shift and go to state 97
     statement                      shift and go to state 3
 
-state 93
+state 97
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1939,7 +2237,7 @@ state 93
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 94
+    RACCOLADE       shift and go to state 98
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1950,7 +2248,7 @@ state 93
 
     statement                      shift and go to state 11
 
-state 94
+state 98
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE .
 
@@ -1959,13 +2257,15 @@ state 94
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 67 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 67 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 67 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 67 resolved as shift
-WARNING: shift/reduce conflict for INF in state 67 resolved as shift
-WARNING: shift/reduce conflict for SUP in state 67 resolved as shift
-WARNING: shift/reduce conflict for AND in state 67 resolved as shift
-WARNING: shift/reduce conflict for OR in state 67 resolved as shift
-WARNING: shift/reduce conflict for BOOLEQUAL in state 67 resolved as shift
-WARNING: shift/reduce conflict for COMA in state 67 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 71 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 71 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 71 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 71 resolved as shift
+WARNING: shift/reduce conflict for INF in state 71 resolved as shift
+WARNING: shift/reduce conflict for SUP in state 71 resolved as shift
+WARNING: shift/reduce conflict for INFEQUAL in state 71 resolved as shift
+WARNING: shift/reduce conflict for SUPEQUAL in state 71 resolved as shift
+WARNING: shift/reduce conflict for AND in state 71 resolved as shift
+WARNING: shift/reduce conflict for OR in state 71 resolved as shift
+WARNING: shift/reduce conflict for BOOLEQUAL in state 71 resolved as shift
+WARNING: shift/reduce conflict for COMA in state 71 resolved as shift

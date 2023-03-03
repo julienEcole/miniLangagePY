@@ -204,14 +204,14 @@ def evalString(p):
 
 def assignParam(name, val, rep=[]):
     for param in val:
-        if type(param) is tuple:
+        if type(param) == tuple:
             assignParam(name, param, rep)
-        elif type(param) is str and param is not 'PARAM':
+        elif type(param) == str and param != 'PARAM':
             rep.append([param, 'undefined'])
     return rep
 
 def getValueParam(name, val, rep=[]):
-    if type(val) is not tuple:
+    if type(val) != tuple:
         val = [val]
 
     for param in val:

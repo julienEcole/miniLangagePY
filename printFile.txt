@@ -12,11 +12,3 @@
 21
 34
 55
-89
-144
-233
-377
-610
-987
- fin exemple
- Fin programme

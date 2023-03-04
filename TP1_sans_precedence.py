@@ -151,6 +151,10 @@ def evalInst(p):
     if p[0] == 'CALL_PARAM':
         global isInFunction
         isInFunction = p[1]
+        nbArgument = len(functions[isInFunction][0])
+        if(nbArgument != compterTuppleCascadeElement(p[2])):
+            #alors cas problementaque :
+            print(f"Erreur: Le nombre d'argument dans la fonction ->{p[1]}() deverait être a {nbArgument} et non {compterTuppleCascadeElement(p[2])}")
         assignValueParam(p[1],p[2])
         evalInst(functions[p[1]][1])
         isInFunction = False
@@ -190,6 +194,17 @@ def evalExpr(p):
 
     return 'UNK'
     
+def compterTuppleCascadeElement(tupple):    #cette cascade ne marche que pour les tupples de p assignant des fonction, elle n'a pas été testé sur d'autre organisation de tupples.
+    if(type(tupple) != tuple):
+        if(tupple):
+            return 1
+        else :
+            return 0
+    else :
+        if(tupple[1]) :
+            return len(tupple) - 1 + compterTuppleCascadeElement(tupple[1])
+        else : return 1
+
 def evalString(p):
     string = ""
 
@@ -204,14 +219,14 @@ def evalString(p):
 
 def assignParam(name, val, rep=[]):
     for param in val:
-        if type(param) is tuple:
+        if type(param) == tuple:
             assignParam(name, param, rep)
-        elif type(param) is str and param is not 'PARAM':
+        elif type(param) == str and param != 'PARAM':
             rep.append([param, 'undefined'])
     return rep
 
 def getValueParam(name, val, rep=[]):
-    if type(val) is not tuple:
+    if type(val) != tuple:
         val = [val]
 
     for param in val:

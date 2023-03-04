@@ -144,17 +144,14 @@ def evalInst(p):
         if p[1] in functions:
             evalInst(functions[p[1]][1])
         else:
-            # TODO: Si la fonction n'existe pas, throw une exeption
-            print(f"Erreur: La fonction ->{p[1]}() n'existe pas")
-            return
+            raise NameError(f"{p[1]}() function does not exist")
     
     if p[0] == 'CALL_PARAM':
         global isInFunction
         isInFunction = p[1]
         nbArgument = len(functions[isInFunction][0])
         if(nbArgument != compterTuppleCascadeElement(p[2])):
-            #alors cas problementaque :
-            print(f"Erreur: Le nombre d'argument dans la fonction ->{p[1]}() deverait être a {nbArgument} et non {compterTuppleCascadeElement(p[2])}")
+            raise NameError(f'The number of arguments in the function {p[1]}() should be {nbArgument} and not {compterTuppleCascadeElement(p[2])}')
         assignValueParam(p[1],p[2])
         evalInst(functions[p[1]][1])
         isInFunction = False
@@ -167,17 +164,15 @@ def evalExpr(p):
     if type(p) == str : 
         #--------------------------------
         # Check if it has to serch into local variable or into global
-        if isInFunction : #si on est dans une fonction et que la var locale du meme nom existe
+        if isInFunction :
             for x in functions[isInFunction][0]:
                 if x[0] == p:
                     return x[1]
         #--------------------------------
-        # PARTIE VAR GLOBALE
-        # TODO: Si la varible n'existe pas throw une exeption
-        elif not(names[p]) : return 'UNK' # In this case we call an unknow variable
+        # Global Variable
+        elif not(names[p]) : raise NameError(f'Variable {p} does not exist')
         return names[p]
         #-------------------------
-        #fin var
     if type(p) == tuple:
         if p[0]=='+':return evalExpr(p[1])+evalExpr(p[2])
         if p[0]=='-':return evalExpr(p[1])-evalExpr(p[2])
@@ -194,7 +189,7 @@ def evalExpr(p):
 
     return 'UNK'
     
-def compterTuppleCascadeElement(tupple):    #cette cascade ne marche que pour les tupples de p assignant des fonction, elle n'a pas été testé sur d'autre organisation de tupples.
+def compterTuppleCascadeElement(tupple): 
     if(type(tupple) != tuple):
         if(tupple):
             return 1
@@ -350,16 +345,8 @@ def p_error(p):
 import ply.yacc as yacc
 yacc.yacc()
 
-
-# s = input('INPUT >>> ')
-s='print(1+2);x=4;x=x+1;'
-s='x=4;x=x+1;if(x<10){print(1+2);};'
-
 s=file_read()
 
-
-
 yacc.parse(s)
-
 
 pprint(functions)

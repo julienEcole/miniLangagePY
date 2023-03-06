@@ -18,7 +18,7 @@ function suiteFibonacci(param1,param2,param3,param4){
         suivant = n1 + n2;
         print(suivant);
 
-        n1 = n23;
+        n1 = n2;
         n2 = suivant;
     };
 

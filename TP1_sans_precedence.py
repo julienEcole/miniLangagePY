@@ -329,8 +329,15 @@ def p_expression_name(p):
 
 def p_param_funct(p):
     '''param : NAME COMA param
+             | NAME EQUALS expression COMA param
+             | NAME EQUALS expression
              | NAME'''
-    if len(p)==4 : p[0] = ("PARAM", p[1], p[3]) 
+    if len(p)==4 :
+        if p[2] == ',':
+            p[0] = ("PARAM", p[1], p[3]) 
+        else:
+            p[0] = ("PARAM", (p[1], p[3]))
+    elif len(p)==6 : p[0] = ("PARAM", (p[1], p[3]), p[5]) 
     elif len(p)==2 : p[0] = ("PARAM", p[1])
 
 def p_print_name(p):

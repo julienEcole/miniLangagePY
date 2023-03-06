@@ -6,7 +6,7 @@ function secondTest(param1){
     print(param1);
 };
 
-function suiteFibonacci(param1,param2,param3,param4){
+function suiteFibonacci(param1,param2,param3=15,param4=13){
     nterms = 15;
     n1 = 0;
     n2 = 1;

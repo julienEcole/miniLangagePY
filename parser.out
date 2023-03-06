@@ -38,18 +38,20 @@ Rule 27    expression -> LPAREN expression RPAREN
 Rule 28    expression -> NUMBER
 Rule 29    expression -> NAME
 Rule 30    param -> NAME COMA param
-Rule 31    param -> NAME
-Rule 32    strings -> NAME strings
-Rule 33    strings -> NAME
+Rule 31    param -> NAME EQUALS expression COMA param
+Rule 32    param -> NAME EQUALS expression
+Rule 33    param -> NAME
+Rule 34    strings -> NAME strings
+Rule 35    strings -> NAME
 
 Terminals, with rules where they appear
 
 AND                  : 22
 BOOLEQUAL            : 24
-COMA                 : 26 30
+COMA                 : 26 30 31
 DIVIDE               : 17
 ELSE                 : 
-EQUALS               : 4 9 9
+EQUALS               : 4 9 9 31 32
 FOR                  : 9
 FUNC                 : 10 11
 IF                   : 7
@@ -58,7 +60,7 @@ INFEQUAL             : 20
 LACCOLADE            : 7 8 9 10 11
 LPAREN               : 5 6 7 8 9 10 11 12 13 27
 MINUS                : 15 25
-NAME                 : 4 9 9 10 11 12 13 29 30 31 32 33
+NAME                 : 4 9 9 10 11 12 13 29 30 31 32 33 34 35
 NUMBER               : 28
 OR                   : 23
 PLUS                 : 14
@@ -77,11 +79,11 @@ error                :
 Nonterminals, with rules where they appear
 
 bloc                 : 1 2 7 8 9 10 11
-expression           : 4 5 7 8 9 9 9 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 26 26 27
-param                : 11 30
+expression           : 4 5 7 8 9 9 9 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 26 26 27 31 32
+param                : 11 30 31
 start                : 0
 statement            : 2 3
-strings              : 6 32
+strings              : 6 34
 
 Parsing method: LALR
 
@@ -314,8 +316,8 @@ state 15
 state 16
 
     (6) statement -> PRINTSTR LPAREN . strings RPAREN
-    (32) strings -> . NAME strings
-    (33) strings -> . NAME
+    (34) strings -> . NAME strings
+    (35) strings -> . NAME
 
     NAME            shift and go to state 31
 
@@ -608,12 +610,12 @@ state 30
 
 state 31
 
-    (32) strings -> NAME . strings
-    (33) strings -> NAME .
-    (32) strings -> . NAME strings
-    (33) strings -> . NAME
+    (34) strings -> NAME . strings
+    (35) strings -> NAME .
+    (34) strings -> . NAME strings
+    (35) strings -> . NAME
 
-    RPAREN          reduce using rule 33 (strings -> NAME .)
+    RPAREN          reduce using rule 35 (strings -> NAME .)
     NAME            shift and go to state 31
 
     strings                        shift and go to state 53
@@ -692,7 +694,9 @@ state 35
     (10) statement -> FUNC NAME LPAREN . RPAREN LACCOLADE bloc RACCOLADE
     (11) statement -> FUNC NAME LPAREN . param RPAREN LACCOLADE bloc RACCOLADE
     (30) param -> . NAME COMA param
-    (31) param -> . NAME
+    (31) param -> . NAME EQUALS expression COMA param
+    (32) param -> . NAME EQUALS expression
+    (33) param -> . NAME
 
     RPAREN          shift and go to state 58
     NAME            shift and go to state 57
@@ -1122,9 +1126,9 @@ state 52
 
 state 53
 
-    (32) strings -> NAME strings .
+    (34) strings -> NAME strings .
 
-    RPAREN          reduce using rule 32 (strings -> NAME strings .)
+    RPAREN          reduce using rule 34 (strings -> NAME strings .)
 
 
 state 54
@@ -1171,24 +1175,27 @@ state 56
 state 57
 
     (30) param -> NAME . COMA param
-    (31) param -> NAME .
+    (31) param -> NAME . EQUALS expression COMA param
+    (32) param -> NAME . EQUALS expression
+    (33) param -> NAME .
 
     COMA            shift and go to state 76
-    RPAREN          reduce using rule 31 (param -> NAME .)
+    EQUALS          shift and go to state 77
+    RPAREN          reduce using rule 33 (param -> NAME .)
 
 
 state 58
 
     (10) statement -> FUNC NAME LPAREN RPAREN . LACCOLADE bloc RACCOLADE
 
-    LACCOLADE       shift and go to state 77
+    LACCOLADE       shift and go to state 78
 
 
 state 59
 
     (11) statement -> FUNC NAME LPAREN param . RPAREN LACCOLADE bloc RACCOLADE
 
-    RPAREN          shift and go to state 78
+    RPAREN          shift and go to state 79
 
 
 state 60
@@ -1787,7 +1794,7 @@ state 73
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 79
+    bloc                           shift and go to state 80
     statement                      shift and go to state 3
 
 state 74
@@ -1814,7 +1821,7 @@ state 74
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 80
+    bloc                           shift and go to state 81
     statement                      shift and go to state 3
 
 state 75
@@ -1833,7 +1840,7 @@ state 75
     (24) expression -> expression . BOOLEQUAL expression
     (26) expression -> expression . COMA expression
 
-    SEMI            shift and go to state 81
+    SEMI            shift and go to state 82
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
@@ -1852,13 +1859,43 @@ state 76
 
     (30) param -> NAME COMA . param
     (30) param -> . NAME COMA param
-    (31) param -> . NAME
+    (31) param -> . NAME EQUALS expression COMA param
+    (32) param -> . NAME EQUALS expression
+    (33) param -> . NAME
 
     NAME            shift and go to state 57
 
-    param                          shift and go to state 82
+    param                          shift and go to state 83
 
 state 77
+
+    (31) param -> NAME EQUALS . expression COMA param
+    (32) param -> NAME EQUALS . expression
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+    NAME            shift and go to state 22
+
+    expression                     shift and go to state 84
+
+state 78
 
     (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE . bloc RACCOLADE
     (2) bloc -> . bloc statement SEMI
@@ -1882,17 +1919,17 @@ state 77
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 83
+    bloc                           shift and go to state 85
     statement                      shift and go to state 3
 
-state 78
+state 79
 
     (11) statement -> FUNC NAME LPAREN param RPAREN . LACCOLADE bloc RACCOLADE
 
-    LACCOLADE       shift and go to state 84
+    LACCOLADE       shift and go to state 86
 
 
-state 79
+state 80
 
     (7) statement -> IF LPAREN expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1907,7 +1944,7 @@ state 79
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 85
+    RACCOLADE       shift and go to state 87
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1918,7 +1955,7 @@ state 79
 
     statement                      shift and go to state 11
 
-state 80
+state 81
 
     (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -1933,7 +1970,7 @@ state 80
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 86
+    RACCOLADE       shift and go to state 88
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -1944,7 +1981,7 @@ state 80
 
     statement                      shift and go to state 11
 
-state 81
+state 82
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI . expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> . expression PLUS expression
@@ -1969,85 +2006,19 @@ state 81
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 87
+    expression                     shift and go to state 89
 
-state 82
+state 83
 
     (30) param -> NAME COMA param .
 
     RPAREN          reduce using rule 30 (param -> NAME COMA param .)
 
 
-state 83
-
-    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc . RACCOLADE
-    (2) bloc -> bloc . statement SEMI
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . PRINT LPAREN expression RPAREN
-    (6) statement -> . PRINTSTR LPAREN strings RPAREN
-    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
-    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
-    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
-    (12) statement -> . NAME LPAREN RPAREN
-    (13) statement -> . NAME LPAREN expression RPAREN
-
-    RACCOLADE       shift and go to state 88
-    NAME            shift and go to state 4
-    PRINT           shift and go to state 5
-    PRINTSTR        shift and go to state 6
-    IF              shift and go to state 7
-    WHILE           shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
-
-    statement                      shift and go to state 11
-
 state 84
 
-    (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE . bloc RACCOLADE
-    (2) bloc -> . bloc statement SEMI
-    (3) bloc -> . statement SEMI
-    (4) statement -> . NAME EQUALS expression
-    (5) statement -> . PRINT LPAREN expression RPAREN
-    (6) statement -> . PRINTSTR LPAREN strings RPAREN
-    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
-    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
-    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
-    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
-    (12) statement -> . NAME LPAREN RPAREN
-    (13) statement -> . NAME LPAREN expression RPAREN
-
-    NAME            shift and go to state 4
-    PRINT           shift and go to state 5
-    PRINTSTR        shift and go to state 6
-    IF              shift and go to state 7
-    WHILE           shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
-
-    bloc                           shift and go to state 89
-    statement                      shift and go to state 3
-
-state 85
-
-    (7) statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
-
-    SEMI            reduce using rule 7 (statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
-
-
-state 86
-
-    (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
-
-    SEMI            reduce using rule 8 (statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
-
-
-state 87
-
-    (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression . SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (31) param -> NAME EQUALS expression . COMA param
+    (32) param -> NAME EQUALS expression .
     (14) expression -> expression . PLUS expression
     (15) expression -> expression . MINUS expression
     (16) expression -> expression . TIMES expression
@@ -2061,7 +2032,8 @@ state 87
     (24) expression -> expression . BOOLEQUAL expression
     (26) expression -> expression . COMA expression
 
-    SEMI            shift and go to state 90
+    COMA            shift and go to state 90
+    RPAREN          reduce using rule 32 (param -> NAME EQUALS expression .)
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
@@ -2073,19 +2045,11 @@ state 87
     AND             shift and go to state 44
     OR              shift and go to state 45
     BOOLEQUAL       shift and go to state 46
-    COMA            shift and go to state 47
 
 
-state 88
+state 85
 
-    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .
-
-    SEMI            reduce using rule 10 (statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .)
-
-
-state 89
-
-    (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc . RACCOLADE
+    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
     (4) statement -> . NAME EQUALS expression
     (5) statement -> . PRINT LPAREN expression RPAREN
@@ -2109,28 +2073,202 @@ state 89
 
     statement                      shift and go to state 11
 
+state 86
+
+    (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE . bloc RACCOLADE
+    (2) bloc -> . bloc statement SEMI
+    (3) bloc -> . statement SEMI
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . PRINT LPAREN expression RPAREN
+    (6) statement -> . PRINTSTR LPAREN strings RPAREN
+    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
+    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
+    (12) statement -> . NAME LPAREN RPAREN
+    (13) statement -> . NAME LPAREN expression RPAREN
+
+    NAME            shift and go to state 4
+    PRINT           shift and go to state 5
+    PRINTSTR        shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    FUNC            shift and go to state 10
+
+    bloc                           shift and go to state 92
+    statement                      shift and go to state 3
+
+state 87
+
+    (7) statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
+
+    SEMI            reduce using rule 7 (statement -> IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
+
+
+state 88
+
+    (8) statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .
+
+    SEMI            reduce using rule 8 (statement -> WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE .)
+
+
+state 89
+
+    (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression . SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (14) expression -> expression . PLUS expression
+    (15) expression -> expression . MINUS expression
+    (16) expression -> expression . TIMES expression
+    (17) expression -> expression . DIVIDE expression
+    (18) expression -> expression . INF expression
+    (19) expression -> expression . SUP expression
+    (20) expression -> expression . INFEQUAL expression
+    (21) expression -> expression . SUPEQUAL expression
+    (22) expression -> expression . AND expression
+    (23) expression -> expression . OR expression
+    (24) expression -> expression . BOOLEQUAL expression
+    (26) expression -> expression . COMA expression
+
+    SEMI            shift and go to state 93
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    TIMES           shift and go to state 38
+    DIVIDE          shift and go to state 39
+    INF             shift and go to state 40
+    SUP             shift and go to state 41
+    INFEQUAL        shift and go to state 42
+    SUPEQUAL        shift and go to state 43
+    AND             shift and go to state 44
+    OR              shift and go to state 45
+    BOOLEQUAL       shift and go to state 46
+    COMA            shift and go to state 47
+
+
 state 90
+
+    (31) param -> NAME EQUALS expression COMA . param
+    (26) expression -> expression COMA . expression
+    (30) param -> . NAME COMA param
+    (31) param -> . NAME EQUALS expression COMA param
+    (32) param -> . NAME EQUALS expression
+    (33) param -> . NAME
+    (14) expression -> . expression PLUS expression
+    (15) expression -> . expression MINUS expression
+    (16) expression -> . expression TIMES expression
+    (17) expression -> . expression DIVIDE expression
+    (18) expression -> . expression INF expression
+    (19) expression -> . expression SUP expression
+    (20) expression -> . expression INFEQUAL expression
+    (21) expression -> . expression SUPEQUAL expression
+    (22) expression -> . expression AND expression
+    (23) expression -> . expression OR expression
+    (24) expression -> . expression BOOLEQUAL expression
+    (25) expression -> . MINUS expression
+    (26) expression -> . expression COMA expression
+    (27) expression -> . LPAREN expression RPAREN
+    (28) expression -> . NUMBER
+    (29) expression -> . NAME
+
+    NAME            shift and go to state 94
+    MINUS           shift and go to state 24
+    LPAREN          shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    expression                     shift and go to state 71
+    param                          shift and go to state 95
+
+state 91
+
+    (10) statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .
+
+    SEMI            reduce using rule 10 (statement -> FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE .)
+
+
+state 92
+
+    (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc . RACCOLADE
+    (2) bloc -> bloc . statement SEMI
+    (4) statement -> . NAME EQUALS expression
+    (5) statement -> . PRINT LPAREN expression RPAREN
+    (6) statement -> . PRINTSTR LPAREN strings RPAREN
+    (7) statement -> . IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (8) statement -> . WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+    (9) statement -> . FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
+    (10) statement -> . FUNC NAME LPAREN RPAREN LACCOLADE bloc RACCOLADE
+    (11) statement -> . FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE
+    (12) statement -> . NAME LPAREN RPAREN
+    (13) statement -> . NAME LPAREN expression RPAREN
+
+    RACCOLADE       shift and go to state 96
+    NAME            shift and go to state 4
+    PRINT           shift and go to state 5
+    PRINTSTR        shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    FUNC            shift and go to state 10
+
+    statement                      shift and go to state 11
+
+state 93
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI . NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
 
-    NAME            shift and go to state 92
+    NAME            shift and go to state 97
 
 
-state 91
+state 94
+
+    (30) param -> NAME . COMA param
+    (31) param -> NAME . EQUALS expression COMA param
+    (32) param -> NAME . EQUALS expression
+    (33) param -> NAME .
+    (29) expression -> NAME .
+
+  ! shift/reduce conflict for COMA resolved as shift
+  ! reduce/reduce conflict for RPAREN resolved using rule 29 (expression -> NAME .)
+    COMA            shift and go to state 76
+    EQUALS          shift and go to state 77
+    PLUS            reduce using rule 29 (expression -> NAME .)
+    MINUS           reduce using rule 29 (expression -> NAME .)
+    TIMES           reduce using rule 29 (expression -> NAME .)
+    DIVIDE          reduce using rule 29 (expression -> NAME .)
+    INF             reduce using rule 29 (expression -> NAME .)
+    SUP             reduce using rule 29 (expression -> NAME .)
+    INFEQUAL        reduce using rule 29 (expression -> NAME .)
+    SUPEQUAL        reduce using rule 29 (expression -> NAME .)
+    AND             reduce using rule 29 (expression -> NAME .)
+    OR              reduce using rule 29 (expression -> NAME .)
+    BOOLEQUAL       reduce using rule 29 (expression -> NAME .)
+    RPAREN          reduce using rule 29 (expression -> NAME .)
+
+  ! RPAREN          [ reduce using rule 33 (param -> NAME .) ]
+  ! COMA            [ reduce using rule 29 (expression -> NAME .) ]
+
+
+state 95
+
+    (31) param -> NAME EQUALS expression COMA param .
+
+    RPAREN          reduce using rule 31 (param -> NAME EQUALS expression COMA param .)
+
+
+state 96
 
     (11) statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE .
 
     SEMI            reduce using rule 11 (statement -> FUNC NAME LPAREN param RPAREN LACCOLADE bloc RACCOLADE .)
 
 
-state 92
+state 97
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME . EQUALS expression RPAREN LACCOLADE bloc RACCOLADE
 
-    EQUALS          shift and go to state 93
+    EQUALS          shift and go to state 98
 
 
-state 93
+state 98
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS . expression RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> . expression PLUS expression
@@ -2155,9 +2293,9 @@ state 93
     NUMBER          shift and go to state 26
     NAME            shift and go to state 22
 
-    expression                     shift and go to state 94
+    expression                     shift and go to state 99
 
-state 94
+state 99
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression . RPAREN LACCOLADE bloc RACCOLADE
     (14) expression -> expression . PLUS expression
@@ -2173,7 +2311,7 @@ state 94
     (24) expression -> expression . BOOLEQUAL expression
     (26) expression -> expression . COMA expression
 
-    RPAREN          shift and go to state 95
+    RPAREN          shift and go to state 100
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
     TIMES           shift and go to state 38
@@ -2188,14 +2326,14 @@ state 94
     COMA            shift and go to state 47
 
 
-state 95
+state 100
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN . LACCOLADE bloc RACCOLADE
 
-    LACCOLADE       shift and go to state 96
+    LACCOLADE       shift and go to state 101
 
 
-state 96
+state 101
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE . bloc RACCOLADE
     (2) bloc -> . bloc statement SEMI
@@ -2219,10 +2357,10 @@ state 96
     FOR             shift and go to state 9
     FUNC            shift and go to state 10
 
-    bloc                           shift and go to state 97
+    bloc                           shift and go to state 102
     statement                      shift and go to state 3
 
-state 97
+state 102
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc . RACCOLADE
     (2) bloc -> bloc . statement SEMI
@@ -2237,7 +2375,7 @@ state 97
     (12) statement -> . NAME LPAREN RPAREN
     (13) statement -> . NAME LPAREN expression RPAREN
 
-    RACCOLADE       shift and go to state 98
+    RACCOLADE       shift and go to state 103
     NAME            shift and go to state 4
     PRINT           shift and go to state 5
     PRINTSTR        shift and go to state 6
@@ -2248,7 +2386,7 @@ state 97
 
     statement                      shift and go to state 11
 
-state 98
+state 103
 
     (9) statement -> FOR LPAREN NAME EQUALS expression SEMI expression SEMI NAME EQUALS expression RPAREN LACCOLADE bloc RACCOLADE .
 
@@ -2269,3 +2407,6 @@ WARNING: shift/reduce conflict for AND in state 71 resolved as shift
 WARNING: shift/reduce conflict for OR in state 71 resolved as shift
 WARNING: shift/reduce conflict for BOOLEQUAL in state 71 resolved as shift
 WARNING: shift/reduce conflict for COMA in state 71 resolved as shift
+WARNING: shift/reduce conflict for COMA in state 94 resolved as shift
+WARNING: reduce/reduce conflict in state 94 resolved using rule (expression -> NAME)
+WARNING: rejected rule (param -> NAME) in state 94

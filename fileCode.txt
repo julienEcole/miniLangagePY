@@ -1,5 +1,9 @@
-function test(){
-    printstr(cest du text depuis une fonctions);
+function testVraiFaux(isIt){
+    if(isIt){
+        printstr(Le test est vrai);
+    }else{
+        printstr(Le test est faux);
+    };
 };
 
 function secondTest(param1){
@@ -23,7 +27,7 @@ function suiteFibonacci(nterms){
 
 };
 
-test();
+testVraiFaux(1);
 secondTest(999999999);
 suiteFibonacci(14);
 

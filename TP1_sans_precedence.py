@@ -123,6 +123,11 @@ def evalInst(p):
     if p[0] == 'IF':
         if evalExpr(p[1]):
             evalInst(p[2])
+        else:
+            try:
+                evalInst(p[3])
+            except:
+                pass
 
     if p[0] == 'WHILE':
         while evalExpr(p[1]):
@@ -270,8 +275,10 @@ def p_statement_print_str(p):
 
 
 def p_statement_if(p):
-    'statement : IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE'
-    p[0] = ('IF', p[3], p[6])
+    '''statement : IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE
+                 | IF LPAREN expression RPAREN LACCOLADE bloc RACCOLADE ELSE LACCOLADE bloc RACCOLADE'''
+    if len(p)==8 : p[0] = ('IF', p[3], p[6])
+    else : p[0] = ('IF', p[3], p[6], p[10])
 
 def p_statement_while(p):
     'statement : WHILE LPAREN expression RPAREN LACCOLADE bloc RACCOLADE'

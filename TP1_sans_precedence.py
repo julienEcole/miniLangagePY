@@ -150,8 +150,8 @@ def evalInst(p):
         global isInFunction
         isInFunction = p[1]
         nbArgument = len(functions[isInFunction][0])
-        if(nbArgument != compterTuppleCascadeElement(p[2])):
-            raise NameError(f'The number of arguments in the function {p[1]}() should be {nbArgument} and not {compterTuppleCascadeElement(p[2])}')
+        # if(nbArgument != compterTuppleCascadeElement(p[2])):
+        #     raise NameError(f'The number of arguments in the function {p[1]}() should be {nbArgument} and not {compterTuppleCascadeElement(p[2])}')
         assignValueParam(p[1],p[2])
         evalInst(functions[p[1]][1])
         isInFunction = False
@@ -215,7 +215,10 @@ def evalString(p):
 def assignParam(name, val, rep=[]):
     for param in val:
         if type(param) == tuple:
-            assignParam(name, param, rep)
+            if param[0] == 'PARAM':
+                assignParam(name, param, rep)
+            else:
+                rep.append([param[0], param[1]])
         elif type(param) == str and param != 'PARAM':
             rep.append([param, 'undefined'])
     return rep
@@ -233,7 +236,7 @@ def getValueParam(name, val, rep=[]):
 
 def assignValueParam(name, val):
     listVal = getValueParam(name,val, [])
-    for i in range(len(functions[name][0])):
+    for i in range(len(listVal)):
         functions[name][0][i][1] =  listVal[i]
 
 
@@ -356,4 +359,4 @@ s=file_read()
 
 yacc.parse(s)
 
-pprint(functions)
+# pprint(functions)

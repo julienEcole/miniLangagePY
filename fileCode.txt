@@ -6,15 +6,14 @@ function secondTest(param1){
     print(param1);
 };
 
-function suiteFibonacci(param1,param2,param3=15,param4=13){
-    nterms = 15;
+function suiteFibonacci(nterms){
     n1 = 0;
     n2 = 1;
 
     print(n1);
     print(n2);
 
-    for( i = 0 ; i < nterms ;i=i+1){
+    for( i = 0 ; i < nterms - 2 ;i=i+1){
         suivant = n1 + n2;
         print(suivant);
 
@@ -24,9 +23,8 @@ function suiteFibonacci(param1,param2,param3=15,param4=13){
 
 };
 
-printstr(test);
 test();
 secondTest(999999999);
-suiteFibonacci(1,2,3,4);
+suiteFibonacci(14);
 
 printstr(Fin programme);

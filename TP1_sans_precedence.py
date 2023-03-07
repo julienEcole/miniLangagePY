@@ -244,7 +244,7 @@ def assignValueParam(name, val):
         while(nbArgument >= 0 and functions[isInFunction][0][nbArgument][1] != 'undefined') :
             nbArgument -= 1
         if(nbArgument >= 0): 
-            raise NameError(f'The number of arguments in the function {p[1]}() should have {nbArgument} more defined argument')
+            raise NameError(f'The number of arguments in the function {isInFunction}() should have {nbArgument} more defined argument')
 
 
 def p_start(p):

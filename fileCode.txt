@@ -1,3 +1,5 @@
+# Fonction pour tester le si sinon et les params de fonction ;
+
 function testVraiFaux(isIt){
     if(isIt){
         printstr(Le test est vrai);
@@ -10,6 +12,7 @@ function secondTest(param1){
     print(param1);
 };
 
+# Fonction simple ;
 function suiteFibonacci(nterms){
     n1 = 0;
     n2 = 1;

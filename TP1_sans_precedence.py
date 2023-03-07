@@ -20,7 +20,7 @@ reserved = {
 tokens = [
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'SEMI', 'COMA', 
+    'LPAREN','RPAREN', 'SEMI', 'COMA', 'SHARP', 
     'INF','INFEQUAL', 'SUP', 'SUPEQUAL', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
 # Tokens
 
@@ -43,6 +43,7 @@ t_RACCOLADE  = r'}'
 t_OR     = r'\|'
 t_BOOLEQUAL = r'=='
 t_COMA = r'\,'
+t_SHARP = r'\#'
 
 
 def t_NAME(t):
@@ -132,6 +133,9 @@ def evalInst(p):
     if p[0] == 'WHILE':
         while evalExpr(p[1]):
             evalInst(p[2])
+
+    if p[0] == 'SHARP':
+        pass
 
     if p[0] == 'FOR':
         evalInst(p[1])
@@ -301,6 +305,9 @@ def p_statement_call_function(p):
     if len(p)==4 : p[0] = ('CALL', p[1])
     else : p[0] = ('CALL_PARAM', p[1], p[3])
     
+def p_statement_sharp(p):
+    'statement : SHARP strings'
+    p[0] = ('SHARP', p[2])
 
 def p_expression_binop(p):
     '''expression : expression PLUS expression

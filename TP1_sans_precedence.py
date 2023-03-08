@@ -245,7 +245,10 @@ def getValueParam(name, val, rep=[]):
 def assignValueParam(name, val):
     listVal = getValueParam(name,val, [])
     for i in range(len(listVal)):
-        functions[name][0][i][1] =  listVal[i] #assignation des valeurs
+        try :
+            functions[name][0][i][1] =  listVal[i] #assignation des valeurs
+        except IndexError :
+            raise NameError(f"Too many argument : The argument {listVal[i]} does not exist ")
     #----------------------------
     #partie verification que toutes les valeurs ont étés assignés.
     if(isInFunction and functions[isInFunction]):
@@ -253,7 +256,7 @@ def assignValueParam(name, val):
         while(nbArgument >= 0 and functions[isInFunction][0][nbArgument][1] != 'undefined') :
             nbArgument -= 1
         if(nbArgument >= 0): 
-            raise NameError(f'The number of arguments in the function {isInFunction}() should have {nbArgument} more defined argument')
+            raise NameError(f'The number of arguments in the function {isInFunction}() should have {len(functions[isInFunction][0])} defined argument')
 
 
 def p_start(p):

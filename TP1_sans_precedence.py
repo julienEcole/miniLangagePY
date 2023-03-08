@@ -335,7 +335,7 @@ def p_expression_uminus(p):
     p[0] = -p[2]
 
 def p_expression_plus_plus(p):
-    'expression : expression ADDONE'
+    'expression : NAME PLUS PLUS'
     p[0] = (p[2], [p[1]])
 
 def p_expression_suite(p):

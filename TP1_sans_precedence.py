@@ -256,7 +256,7 @@ def assignValueParam(name, val):
         nbArgument = len(functions[isInFunction][0]) - 1
         while(nbArgument >= 0 and functions[isInFunction][0][nbArgument][1] != 'undefined') :
             nbArgument -= 1
-        if(nbArgument != -1): 
+        if(nbArgument >= 0): 
             raise NameError(f'The number of arguments in the function {isInFunction}() should have {len(functions[isInFunction][0])} defined argument')
 
 

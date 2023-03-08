@@ -20,30 +20,31 @@ reserved = {
 tokens = [
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'SEMI', 'COMA', 'SHARP', 
+    'LPAREN','RPAREN', 'SEMI', 'COMA', 'SHARP', 'ADDONE',
     'INF','INFEQUAL', 'SUP', 'SUPEQUAL', 'AND', 'OR', 'LACCOLADE', 'RACCOLADE', 'BOOLEQUAL'] + list(reserved.values())
 # Tokens
 
 
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_EQUALS  = r'='
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_SEMI    = r';'
-t_INF     = r'<'
-t_INFEQUAL= r'<='
-t_SUP     = r'>'
-t_SUPEQUAL= r'>='
-t_AND     = r'&'
+t_PLUS       = r'\+'
+t_MINUS      = r'-'
+t_TIMES      = r'\*'
+t_DIVIDE     = r'/'
+t_EQUALS     = r'='
+t_LPAREN     = r'\('
+t_RPAREN     = r'\)'
+t_SEMI       = r';'
+t_INF        = r'<'
+t_INFEQUAL   = r'<='
+t_SUP        = r'>'
+t_SUPEQUAL   = r'>='
+t_AND        = r'&'
 t_LACCOLADE  = r'{'
 t_RACCOLADE  = r'}'
-t_OR     = r'\|'
-t_BOOLEQUAL = r'=='
-t_COMA = r'\,'
-t_SHARP = r'\#'
+t_OR         = r'\|'
+t_BOOLEQUAL  = r'=='
+t_COMA       = r'\,'
+t_SHARP      = r'\#'
+t_ADDONE    = r'\+\+'
 
 
 def t_NAME(t):
@@ -158,8 +159,6 @@ def evalInst(p):
     if p[0] == 'CALL_PARAM':
         global isInFunction
         isInFunction = p[1]
-        # if(nbArgument != compterTuppleCascadeElement(p[2])):
-        #     raise NameError(f'The number of arguments in the function {p[1]}() should be {nbArgument} and not {compterTuppleCascadeElement(p[2])}')
         assignValueParam(p[1],p[2])
         evalInst(functions[p[1]][1])
         isInFunction = False
@@ -334,6 +333,10 @@ def p_expression_binop(p):
 def p_expression_uminus(p):
     'expression : MINUS expression'
     p[0] = -p[2]
+
+def p_expression_plus_plus(p):
+    'expression : expression ADDONE'
+    p[0] = (p[2], [p[1]])
 
 def p_expression_suite(p):
     '''expression : expression COMA expression'''

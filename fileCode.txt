@@ -1,5 +1,18 @@
 # Fonction pour tester le si sinon et les params de fonction ;
 
+mavariable = 90;
+autreVariable = 60;
+
+# voici un autre commentaire;
+
+function addition(nombre1){
+    print(nombre1 + mavariable);
+};
+
+function test(){
+    print(42);
+};
+
 function testVraiFaux(isIt){
     if(isIt){
         printstr(Le test est vrai);
@@ -32,6 +45,19 @@ function suiteFibonacci(nterms){
 
 testVraiFaux(1);
 secondTest(999999999);
+suiteFibonacci();
 suiteFibonacci(14);
+suiteFibonacci(14,2);
+test();
 
+printstr(test aditionner);
+addition(10);
+printstr(test aditionner avec var en arg);
+addition(autreVariable);
+printstr(different test logic);
+print(2<=2);
+print(1>2);
+printstr(test avec precedence);
+print(42+0&1);
+print(- 1 < 0 & 1);
 printstr(Fin programme);

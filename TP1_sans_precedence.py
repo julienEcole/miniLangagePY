@@ -248,7 +248,7 @@ def assignValueParam(name, val):
         try :
             functions[name][0][i][1] =  listVal[i] #assignation des valeurs
         except IndexError :
-            raise NameError(f"Too many argument : The argument {listVal[i]} does not exist ")
+            raise NameError(f"Too many argument : The argument {listVal[i]} does not exist in the function {isInFunction}")
     #----------------------------
     #partie verification que toutes les valeurs ont étés assignés.
     if(isInFunction and functions[isInFunction]):

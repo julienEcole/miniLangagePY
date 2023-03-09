@@ -9,6 +9,10 @@ function addition(nombre1){
     print(nombre1 + mavariable);
 };
 
+function ambigue(mavariable){
+    print(mavariable);
+};
+
 function test(){
     print(42);
 };
@@ -60,4 +64,5 @@ print(1>2);
 printstr(test avec precedence);
 print(42+0&1);
 print(- 1 < 0 & 1);
+ambigue(42);
 printstr(Fin programme);
